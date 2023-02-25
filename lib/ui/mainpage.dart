@@ -5,6 +5,7 @@ import 'package:fitness_app/ui/home_screen.dart';
 import 'package:fitness_app/ui/insights_screen.dart';
 import 'package:fitness_app/ui/profile.dart';
 import 'package:fitness_app/ui/sgrp.dart';
+import 'package:fitness_app/ui/step_tracker_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'leaderboard_screen.dart';
@@ -41,6 +42,25 @@ class _MainPageState extends State<MainPage> {
                 const Text(
                   '  Settings',
                   style: TextStyle(fontSize: 26, color: Colors.white),
+                ),
+                ListTile(
+                  leading: const Icon(
+                    Icons.directions_walk,
+                    color: Colors.blue,
+                  ),
+                  title: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const StepTrackerScreen(),
+                          ));
+                    },
+                    child: const Text(
+                      'Step Tracker',
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                  ),
                 ),
                 ListTile(
                   leading: const Icon(
