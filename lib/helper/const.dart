@@ -33,9 +33,11 @@ const baseUrl = "https://fitness-app-backend-bhh0.onrender.com";
 const getUserData = "/getData";
 const login = "/login";
 const register = "/signUp";
-
+const getDataofUser = '/showUser';
 const bearerToken = "token";
 
 const dummyApi = "https://jsonplaceholder.typicode.com/albums/1";
+
+
 
 /// fetchAlbum

@@ -265,7 +265,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 }
                                 return null;
                               },
-                              keyboardType: TextInputType.number,
+                              keyboardType: TextInputType.name,
                               decoration: InputDecoration(
                                 fillColor: Colors.white,
                                 hintText: "Gender",

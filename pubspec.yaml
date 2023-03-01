@@ -35,6 +35,7 @@ dependencies:
   shared_preferences: ^2.0.15
   pedometer: ^3.0.0
   permission_handler: ^10.2.0
+  get: ^4.6.5
 
 
   # The following adds the Cupertino Icons font to your application.
