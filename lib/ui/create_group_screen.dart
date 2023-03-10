@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import '../helper/const.dart';
+import '../helper/text_styles.dart';
 import 'mainpage.dart';
 
 class CreateGroupScreen extends StatelessWidget {
@@ -8,77 +9,74 @@ class CreateGroupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          "Create Group",
+          style: subTitleTextStyle.copyWith(color: kPrimaryColor),
+        ),
+        backgroundColor: Colors.black12,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(18.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              "Create Group",
-              style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
-            ),
-            const Text(
+            Text(
               "First Step To develop yourself together !!!",
-              style: TextStyle(fontSize: 18, color: Colors.white24),
+              style: descTextStyle.copyWith(),
             ),
             const SizedBox(height: 20),
             TextFormField(
               decoration: InputDecoration(
-                  fillColor: Colors.white,
-                  hintText: "Groupname",
-                  filled: true,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(18))),
+                label: const Text("Group Name"),
+                fillColor: Colors.white,
+                filled: true,
+                prefixIcon: const Icon(Icons.account_box_rounded),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                prefixIconColor: kPrimaryColor,
+                floatingLabelStyle: const TextStyle(color: kPrimaryColor),
+                focusedBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(width: 2, color: kPrimaryColor),
+                ),
+              ),
             ),
             const SizedBox(height: 20),
             TextFormField(
               decoration: InputDecoration(
-                  fillColor: Colors.white,
-                  hintText: "abc@gmail.com",
-                  filled: true,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(18))),
+                label: const Text("Calorie Goal"),
+                fillColor: Colors.white,
+                filled: true,
+                prefixIcon: const Icon(Icons.add_task_rounded),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                prefixIconColor: kPrimaryColor,
+                floatingLabelStyle: const TextStyle(color: kPrimaryColor),
+                focusedBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(width: 2, color: kPrimaryColor),
+                ),
+              ),
             ),
             const SizedBox(height: 20),
             TextFormField(
               decoration: InputDecoration(
-                  fillColor: Colors.white,
-                  hintText: "Firstname",
-                  filled: true,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(18))),
-            ),
-            const SizedBox(height: 20),
-            TextFormField(
-              decoration: InputDecoration(
-                  fillColor: Colors.white,
-                  hintText: "abc@gmail.com",
-                  filled: true,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(18))),
-            ),
-            const SizedBox(height: 20),
-            TextFormField(
-              decoration: InputDecoration(
-                  fillColor: Colors.white,
-                  hintText: "abc@gmail.com",
-                  filled: true,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(18))),
-            ),
-            const SizedBox(height: 20),
-            TextFormField(
-              obscureText: true,
-              decoration: InputDecoration(
-                  fillColor: Colors.white,
-                  hintText: "**********",
-                  filled: true,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(18))),
+                label: const Text("Step Goal"),
+                fillColor: Colors.white,
+                filled: true,
+                prefixIcon: const Icon(Icons.add_task_rounded),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                prefixIconColor: kPrimaryColor,
+                floatingLabelStyle: const TextStyle(color: kPrimaryColor),
+                focusedBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(width: 2, color: kPrimaryColor),
+                ),
+              ),
             ),
             const SizedBox(height: 20),
             Center(

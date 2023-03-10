@@ -19,10 +19,6 @@ class _EditProfileScreen extends State<EditProfileScreen> {
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
-                leading: IconButton(
-                    onPressed: () => Get.back(),
-                    icon: const Icon(Icons.arrow_back_ios)),
-                    centerTitle: true,
                 title: Text(
                   "Edit Profile",
                   style: subTitleTextStyle.copyWith(color: kPrimaryColor),
@@ -33,12 +29,21 @@ class _EditProfileScreen extends State<EditProfileScreen> {
               child: Container(
                 padding: const EdgeInsets.all(1.0),
                 child: Column(children: [
+                  SizedBox(
+              width: 120,
+              height: 120,
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: const Image(
+                      image: AssetImage(
+                          'assets/947a9f1acf2478edc6e97b9a17ef75aa.jpg'))),
+            ),
                   Form(
                       child: Column(
                     children: [
                       TextFormField(
                         decoration: InputDecoration(
-                          label: const Text("Name"),
+                          label: const Text("Username"),
                           fillColor: Colors.white,
                           filled: true,
                           prefixIcon: const Icon(Icons.account_box_rounded),

@@ -8,6 +8,7 @@ import 'package:fitness_app/ui/sgrp.dart';
 import 'package:fitness_app/ui/step_tracker_screen.dart';
 import 'package:flutter/material.dart';
 
+import 'calorie_tracker.dart';
 import 'leaderboard_screen.dart';
 import 'login_screen.dart';
 
@@ -22,7 +23,7 @@ class _MainPageState extends State<MainPage> {
   int selectedIndex = 0;
   final bottomNavScreens = const [
     HomeScreen(),
-    HomePage(),
+    Calorie(),
     InsightsScreen(),
     LeaderboardScreen(),
   ];
@@ -96,6 +97,22 @@ class _MainPageState extends State<MainPage> {
                 ),
                 ListTile(
                     leading: const Icon(
+                      Icons.file_download_done_rounded,
+                      color: Colors.blue,
+                    ),
+                    title: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const HomePage(),
+                            ));
+                      },
+                      child: const Text("Goals",
+                          style: TextStyle(color: Colors.white, fontSize: 16)),
+                    )),
+                ListTile(
+                    leading: const Icon(
                       Icons.person_add,
                       color: Colors.blue,
                     ),
@@ -115,6 +132,14 @@ class _MainPageState extends State<MainPage> {
                                             borderRadius:
                                                 BorderRadius.circular(18))),
                                   ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: const Text('Done'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
                                 ),
                               );
                             });

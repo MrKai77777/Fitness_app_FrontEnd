@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:fitness_app/helper/storage_manager.dart';
 import 'package:fitness_app/model/register_response.dart';
 import 'package:http/http.dart' as http;
 
 import '../helper/const.dart';
 import '../model/login_response.dart';
+import '../model/profile_response.dart';
 import '../model/user_response.dart';
 
 Future<UserResponse> fetchUsers() async {
@@ -20,6 +22,32 @@ Future<UserResponse> fetchUsers() async {
     // If the server did not return a 200 OK response,
     // then throw an exception.
     throw Exception('Failed to load album');
+  }
+}
+
+Future<ProfileResponse> getUser() async {
+  var uri = Uri.parse(baseUrl + getDataofUser);
+  log('URL : $uri');
+  var token = await StorageManager.readData(bearerToken);
+  log('Token : $token');
+  final response = await http.get(
+    uri,
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer $token"
+    },
+  );
+
+  if (response.statusCode == 200) {
+    log(response.body.toString());
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    return ProfileResponse.fromJson(jsonDecode(response.body));
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load data');
   }
 }
 

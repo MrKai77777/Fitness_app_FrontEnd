@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
+import '../helper/text_styles.dart';
 import 'create_group_screen.dart';
+import '../helper/const.dart';
 
 class grp extends StatelessWidget {
   const grp({Key? key}) : super(key: key);
@@ -9,13 +10,19 @@ class grp extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            "Groups",
+            style: subTitleTextStyle.copyWith(color: kPrimaryColor),
+          ),
+          backgroundColor: Colors.black12,
+        ),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text("Groups",
-                  style: TextStyle(fontSize: 50, color: Colors.white)),
               const SizedBox(height: 40),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -58,7 +65,7 @@ class grp extends StatelessWidget {
                                 return AlertDialog(
                                   title: TextFormField(
                                     decoration: InputDecoration(
-                                      fillColor: Colors.white24,
+                                      fillColor: Colors.black38,
                                       hintText: "#Enter_Group_Tag",
                                       filled: true,
                                       border: OutlineInputBorder(
@@ -66,6 +73,14 @@ class grp extends StatelessWidget {
                                       ),
                                     ),
                                   ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: const Text('Done'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
                                 );
                               });
                         },
@@ -83,7 +98,7 @@ class grp extends StatelessWidget {
               const Text(
                 "Your Groups",
                 style: TextStyle(
-                  color: Colors.green,
+                  color: kRedColor,
                   fontSize: 27,
                 ),
               ),
@@ -94,13 +109,8 @@ class grp extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadiusDirectional.circular(5),
                     color: Colors.white12),
-                child: const Text(
-                  ">Ma_nibba 0",
-                  style: TextStyle(
-                    fontSize: 26,
-                    color: Colors.cyan,
-                  ),
-                ),
+                child: Text(">Ma_nibba 0",
+                    style: normalTextStyle.copyWith(color: kPrimaryColor)),
               ),
               const SizedBox(height: 15),
               Container(
@@ -109,13 +119,8 @@ class grp extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadiusDirectional.circular(5),
                     color: Colors.white12),
-                child: const Text(
-                  ">Ma_nibba 1",
-                  style: TextStyle(
-                    fontSize: 26,
-                    color: Colors.cyan,
-                  ),
-                ),
+                child: Text(">Ma_nibba 1",
+                    style: normalTextStyle.copyWith(color: kPrimaryColor)),
               ),
               const SizedBox(height: 15),
               Container(
@@ -124,13 +129,8 @@ class grp extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadiusDirectional.circular(5),
                     color: Colors.white12),
-                child: const Text(
-                  ">Ma_nibba 2",
-                  style: TextStyle(
-                    fontSize: 26,
-                    color: Colors.cyan,
-                  ),
-                ),
+                child: Text(">Ma_nibba 2",
+                    style: normalTextStyle.copyWith(color: kPrimaryColor)),
               ),
               const SizedBox(height: 15),
               Container(
@@ -139,13 +139,8 @@ class grp extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadiusDirectional.circular(5),
                     color: Colors.white12),
-                child: const Text(
-                  ">Ma_nibba 3",
-                  style: TextStyle(
-                    fontSize: 26,
-                    color: Colors.cyan,
-                  ),
-                ),
+                child: Text(">Ma_nibba 3",
+                    style: normalTextStyle.copyWith(color: kPrimaryColor)),
               ),
             ],
           ),
