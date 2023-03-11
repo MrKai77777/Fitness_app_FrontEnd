@@ -51,9 +51,10 @@ class _EditProfileScreen extends State<EditProfileScreen> {
                                       'assets/947a9f1acf2478edc6e97b9a17ef75aa.jpg'))),
                         ),
                         Form(
+                          key: _editProfileFormKey,
                             child: Column(
                           children: [
-                            
+                          
                             TextFormField(
                               controller: userNameController,
                                     validator: (value) {
@@ -156,7 +157,7 @@ class _EditProfileScreen extends State<EditProfileScreen> {
                                     kPrimaryColor,
                                   ),
                                 ),
-                                onPressed: () {
+                                onPressed: () async {
                                 //   Navigator.push(
                                 //            context,
                                 //            MaterialPageRoute(
@@ -169,7 +170,7 @@ class _EditProfileScreen extends State<EditProfileScreen> {
                                   if (_editProfileFormKey.currentState!.validate()) {
                                     isLoading = true;
                                     setState(() {});
-                                    editUserData(
+                                    await editUserData(
                                       userName:
                                           userNameController.text.toString(),
                                       height: heightController.text.toString(),

@@ -35,6 +35,10 @@ const login = "/login";
 const register = "/signUp";
 const editProfile = "/editProfile";
 const getDataofUser = '/showUser';
+const addGroup = '/task/add';
+const addFriends = '/addFriends';
+const joinGroup = '/task/joinGroup';
+const getFriendData = '/friend/showUserFriend';
 const bearerToken = "token";
 
 const dummyApi = "https://jsonplaceholder.typicode.com/albums/1";

@@ -1,6 +1,9 @@
+import 'package:fitness_app/api_client/api_requests.dart';
 import 'package:flutter/material.dart';
 import '../helper/const.dart';
 import '../helper/text_styles.dart';
+import 'home_screen.dart';
+import 'login_screen.dart';
 import 'mainpage.dart';
 
 class CreateGroupScreen extends StatefulWidget {
@@ -10,14 +13,17 @@ class CreateGroupScreen extends StatefulWidget {
 }
 
 class _CreateGroupScreen extends State<CreateGroupScreen> {
-  final _editProfileFormKey = GlobalKey<FormState>();
+  final _createGroupFormKey = GlobalKey<FormState>();
+
+  bool isLoading = false;
 
   TextEditingController groupNameController =
       TextEditingController(text: "KEC");
-  TextEditingController stepGoalController = TextEditingController(text: "4000");
-  TextEditingController calorieGoalController = TextEditingController(text: "1000");
+  TextEditingController stepGoalController =
+      TextEditingController(text: "4000");
+  TextEditingController calorieGoalController =
+      TextEditingController(text: "1000");
 
-  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,112 +35,154 @@ class _CreateGroupScreen extends State<CreateGroupScreen> {
         ),
         backgroundColor: Colors.black12,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "First Step To develop yourself together !!!",
-              style: descTextStyle.copyWith(),
-            ),
-            const SizedBox(height: 20),
-            TextFormField(
-              controller: groupNameController,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Weight field is required';
-                }
-                return null;
-              },
-              decoration: InputDecoration(
-                label: const Text("Group Name"),
-                fillColor: Colors.white,
-                filled: true,
-                prefixIcon: const Icon(Icons.account_box_rounded),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                prefixIconColor: kPrimaryColor,
-                floatingLabelStyle: const TextStyle(color: kPrimaryColor),
-                focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(width: 2, color: kPrimaryColor),
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : Padding(
+              padding: const EdgeInsets.all(18.0),
+              
+              child: Form(
+                key : _createGroupFormKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "First Step To develop yourself together !!!",
+                      style: descTextStyle.copyWith(),
+                    ),
+                    const SizedBox(height: 20),
+                    TextFormField(
+                      controller: groupNameController,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Weight field is required';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        label: const Text("Group Name"),
+                        fillColor: Colors.white,
+                        filled: true,
+                        prefixIcon: const Icon(Icons.account_box_rounded),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        prefixIconColor: kPrimaryColor,
+                        floatingLabelStyle: const TextStyle(color: kPrimaryColor),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(width: 2, color: kPrimaryColor),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    TextFormField(
+                      controller: calorieGoalController,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Weight field is required';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        label: const Text("Calorie Goal"),
+                        fillColor: Colors.white,
+                        filled: true,
+                        prefixIcon: const Icon(Icons.add_task_rounded),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        prefixIconColor: kPrimaryColor,
+                        floatingLabelStyle: const TextStyle(color: kPrimaryColor),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(width: 2, color: kPrimaryColor),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    TextFormField(
+                      controller: stepGoalController,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Weight field is required';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        label: const Text("Step Goal"),
+                        fillColor: Colors.white,
+                        filled: true,
+                        prefixIcon: const Icon(Icons.add_task_rounded),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        prefixIconColor: kPrimaryColor,
+                        floatingLabelStyle: const TextStyle(color: kPrimaryColor),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(width: 2, color: kPrimaryColor),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Center(
+                      child: ElevatedButton(
+                        style: const ButtonStyle(
+                            padding: MaterialStatePropertyAll(
+                                EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 50)),
+                            backgroundColor: MaterialStatePropertyAll(
+                                Colors.lightGreenAccent)),
+                        onPressed: () async {
+                          FocusScope.of(context).unfocus();
+                          if (_createGroupFormKey.currentState!.validate()) {
+                            isLoading = true;
+                            setState(() {});
+                            await createNewGroup(
+                              groupName: groupNameController.text.toString(),
+                              stepGoal: stepGoalController.text.toString(),
+                              calorieGoal: calorieGoalController.text.toString(),
+                            ).then((value) {
+                              isLoading = false;
+                              setState(() {});
+                              var msg = "";
+                              if (value.success ?? false) {
+                                msg =
+                                    "New Group Created Sucessfully";
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const HomeScreen(),
+                                  ),
+                                );
+                              } else {
+                                msg = value.msg ?? "Failed";
+                              }
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(msg),
+                                ),
+                              );
+                            });
+                          }
+                        },
+                        child: Text(
+                          'Register',
+                          style: normalTextStyle.copyWith(color: Colors.black),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-            TextFormField(
-              controller: calorieGoalController,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Weight field is required';
-                }
-                return null;
-              },
-              decoration: InputDecoration(
-                label: const Text("Calorie Goal"),
-                fillColor: Colors.white,
-                filled: true,
-                prefixIcon: const Icon(Icons.add_task_rounded),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                prefixIconColor: kPrimaryColor,
-                floatingLabelStyle: const TextStyle(color: kPrimaryColor),
-                focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(width: 2, color: kPrimaryColor),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            TextFormField(
-              controller: stepGoalController,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Weight field is required';
-                }
-                return null;
-              },
-              decoration: InputDecoration(
-                label: const Text("Step Goal"),
-                fillColor: Colors.white,
-                filled: true,
-                prefixIcon: const Icon(Icons.add_task_rounded),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                prefixIconColor: kPrimaryColor,
-                floatingLabelStyle: const TextStyle(color: kPrimaryColor),
-                focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(width: 2, color: kPrimaryColor),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Center(
-              child: ElevatedButton(
-                style: const ButtonStyle(
-                    padding: MaterialStatePropertyAll(
-                        EdgeInsets.symmetric(vertical: 10, horizontal: 50)),
-                    backgroundColor:
-                        MaterialStatePropertyAll(Colors.lightGreenAccent)),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const MainPage(),
-                      ));
-                },
-                child: const Text(
-                  'Done',
-                  style: TextStyle(color: Colors.blueAccent, fontSize: 18),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+
+      //             child: const Text(
+      //               'Done',
+      //               style: TextStyle(color: Colors.blueAccent, fontSize: 18),
+      //             ),
+      //           ),
+      //       ],
+      //     ),
+      //   ),
     );
   }
 }

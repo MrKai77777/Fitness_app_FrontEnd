@@ -9,6 +9,7 @@ import 'package:fitness_app/ui/step_tracker_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../api_client/api_requests.dart';
 import '../notification.dart';
 import 'calorie_tracker.dart';
 import 'leaderboard_screen.dart';
@@ -22,6 +23,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  final _addFriendFormKey = GlobalKey<FormState>();
   NotificationServices notificationServices = NotificationServices();
   @override
   void initState() {
@@ -29,6 +31,8 @@ class _MainPageState extends State<MainPage> {
     notificationServices.initializeNotification();
   }
 
+  TextEditingController friendIdController = TextEditingController(text: "");
+  bool isLoading = false;
   int selectedIndex = 0;
   bool switchvalue = false;
   final bottomNavScreens = const [
@@ -155,24 +159,69 @@ class _MainPageState extends State<MainPage> {
                             context: context,
                             builder: (context) {
                               return SizedBox(
-                                child: AlertDialog(
-                                  title: TextFormField(
-                                    decoration: InputDecoration(
-                                        fillColor: Colors.white24,
-                                        hintText: "#Enter_Friend's_User_Id",
-                                        filled: true,
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(18))),
-                                  ),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: const Text('Done'),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
+                                child: Form(
+                                  key: _addFriendFormKey,
+                                  child: AlertDialog(
+                                    title: TextFormField(
+                                      controller: friendIdController,
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'Weight field is required';
+                                        }
+                                        return null;
                                       },
+                                      decoration: InputDecoration(
+                                          fillColor: Colors.white24,
+                                          hintText: "#Enter_Friend's_User_Id",
+                                          filled: true,
+                                          border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(18))),
                                     ),
-                                  ],
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: isLoading
+                                            ? const Center(
+                                                child:
+                                                    CircularProgressIndicator())
+                                            : const Text('Done'),
+                                        onPressed: () async {
+                                          FocusScope.of(context).unfocus();
+                                          if (_addFriendFormKey.currentState!
+                                              .validate()) {
+                                            isLoading = true;
+                                            setState(() {});
+                                            await addFriend(
+                                              friendId: friendIdController.text
+                                                  .toString(),
+                                            ).then((value) {
+                                              isLoading = false;
+                                              setState(() {});
+                                              var msg = "";
+                                              if (value.success ?? false) {
+                                                msg = "Friend Added Sucessfully";
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const HomeScreen(),
+                                                  ),
+                                                );
+                                              } else {
+                                                msg = value.msg ?? "Failed";
+                                              }
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(msg),
+                                                ),
+                                              );
+                                            });
+                                          }
+                                        },
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               );
                             });

@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
+import '../api_client/api_requests.dart';
 import '../helper/text_styles.dart';
 import 'create_group_screen.dart';
 import '../helper/const.dart';
 
-class grp extends StatelessWidget {
+class grp extends StatefulWidget {
   const grp({Key? key}) : super(key: key);
+  @override
+  State<grp> createState() => _grp();
+}
+
+class _grp extends State<grp>{
+  final _grpFormKey = GlobalKey<FormState>();
+
+  bool isLoading = false;
+
+  TextEditingController groupIdController =
+      TextEditingController(text: "");
 
   @override
   Widget build(BuildContext context) {
@@ -62,25 +74,66 @@ class grp extends StatelessWidget {
                           showDialog(
                               context: context,
                               builder: (context) {
-                                return AlertDialog(
-                                  title: TextFormField(
-                                    decoration: InputDecoration(
-                                      fillColor: Colors.black38,
-                                      hintText: "#Enter_Group_Tag",
-                                      filled: true,
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(18),
+                                return Form(
+                                  key: _grpFormKey,
+                                  child: AlertDialog(
+                                    title: TextFormField(
+                                      controller: groupIdController,
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return 'Weight field is required';
+                                          }
+                                          return null;
+                                        },
+                                      decoration: InputDecoration(
+                                        fillColor: Colors.black38,
+                                        hintText: "#Enter_Group_Tag",
+                                        filled: true,
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(18),
+                                        ),
                                       ),
                                     ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: const Text('Done'),
+                                        onPressed: () async {
+                                            FocusScope.of(context).unfocus();
+                                            if (_grpFormKey.currentState!
+                                                .validate()) {
+                                              isLoading = true;
+                                              setState(() {});
+                                              await joinGroups(
+                                                groupId: groupIdController.text
+                                                    .toString(),
+                                              ).then((value) {
+                                                isLoading = false;
+                                                setState(() {});
+                                                var msg = "";
+                                                if (value.success ?? false) {
+                                                  msg = "Group Joined Sucessfully";
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const grp(),
+                                                    ),
+                                                  );
+                                                } else {
+                                                  msg = value.msg ?? "Failed";
+                                                }
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(msg),
+                                                  ),
+                                                );
+                                              });
+                                            }
+                                          },
+                                      ),
+                                    ],
                                   ),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: const Text('Done'),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  ],
                                 );
                               });
                         },
