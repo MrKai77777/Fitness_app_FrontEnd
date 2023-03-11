@@ -6,8 +6,10 @@ import 'package:fitness_app/ui/insights_screen.dart';
 import 'package:fitness_app/ui/profile.dart';
 import 'package:fitness_app/ui/sgrp.dart';
 import 'package:fitness_app/ui/step_tracker_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../notification.dart';
 import 'calorie_tracker.dart';
 import 'leaderboard_screen.dart';
 import 'login_screen.dart';
@@ -20,7 +22,15 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  NotificationServices notificationServices = NotificationServices();
+  @override
+  void initState() {
+    super.initState();
+    notificationServices.initializeNotification();
+  }
+
   int selectedIndex = 0;
+  bool switchvalue = false;
   final bottomNavScreens = const [
     HomeScreen(),
     Calorie(),
@@ -89,9 +99,32 @@ class _MainPageState extends State<MainPage> {
                   ),
                   title: InkWell(
                     onTap: () {},
-                    child: const Text(
-                      'Notification',
-                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Notification',
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                        CupertinoSwitch(
+                          activeColor: CupertinoColors.activeBlue,
+                          trackColor: CupertinoColors.inactiveGray,
+                          thumbColor: CupertinoColors.white,
+                          value: switchvalue,
+                          onChanged: (value) {
+                            setState(() {
+                              switchvalue = value;
+                              //print(value);
+                              if (switchvalue == true) {
+                                print(value);
+                                notificationServices.scheduleNotifiation(
+                                    'Fitness App',
+                                    'Hydration is important.Drink Water');
+                              }
+                            });
+                          },
+                        ),
+                      ],
                     ),
                   ),
                 ),

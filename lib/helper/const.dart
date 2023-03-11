@@ -33,6 +33,7 @@ const baseUrl = "https://fitness-app-backend-bhh0.onrender.com";
 const getUserData = "/getData";
 const login = "/login";
 const register = "/signUp";
+const editProfile = "/editProfile";
 const getDataofUser = '/showUser';
 const bearerToken = "token";
 

@@ -146,3 +146,51 @@ Future<RegisterResponse> registerUser({
     throw Exception('Failed to login');
   }
 }
+
+
+Future<RegisterResponse> editUserData({
+  required String userName,
+  required String height,
+  required String weight,
+}) async {
+  var dataMap = {
+    "username": userName,
+    "weight": weight,
+    "height": height,
+  };
+
+  var uri = Uri.parse(baseUrl + editProfile);
+  
+  var token = await StorageManager.readData(bearerToken);
+  // log('Token : $token');
+
+  final response = await http.post(
+    uri,
+    body: jsonEncode(dataMap),
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer $token"
+    },
+  );
+
+  print("API URI: ${uri.toString()}");
+
+  print("BODY: $dataMap");
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    print("BODY: ${response.body}");
+
+    var data = jsonDecode(response.body);
+    if (data["msg"] != null) {
+      print("ALERT MESSAGE ${data["msg"]}");
+    }
+    return RegisterResponse.fromJson(data);
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to login');
+  }
+}

@@ -3,9 +3,21 @@ import '../helper/const.dart';
 import '../helper/text_styles.dart';
 import 'mainpage.dart';
 
-class CreateGroupScreen extends StatelessWidget {
+class CreateGroupScreen extends StatefulWidget {
   const CreateGroupScreen({Key? key}) : super(key: key);
+  @override
+  State<CreateGroupScreen> createState() => _CreateGroupScreen();
+}
 
+class _CreateGroupScreen extends State<CreateGroupScreen> {
+  final _editProfileFormKey = GlobalKey<FormState>();
+
+  TextEditingController groupNameController =
+      TextEditingController(text: "KEC");
+  TextEditingController stepGoalController = TextEditingController(text: "4000");
+  TextEditingController calorieGoalController = TextEditingController(text: "1000");
+
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +41,13 @@ class CreateGroupScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             TextFormField(
+              controller: groupNameController,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Weight field is required';
+                }
+                return null;
+              },
               decoration: InputDecoration(
                 label: const Text("Group Name"),
                 fillColor: Colors.white,
@@ -46,6 +65,13 @@ class CreateGroupScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             TextFormField(
+              controller: calorieGoalController,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Weight field is required';
+                }
+                return null;
+              },
               decoration: InputDecoration(
                 label: const Text("Calorie Goal"),
                 fillColor: Colors.white,
@@ -63,6 +89,13 @@ class CreateGroupScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             TextFormField(
+              controller: stepGoalController,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Weight field is required';
+                }
+                return null;
+              },
               decoration: InputDecoration(
                 label: const Text("Step Goal"),
                 fillColor: Colors.white,
