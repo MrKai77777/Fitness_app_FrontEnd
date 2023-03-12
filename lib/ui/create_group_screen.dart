@@ -1,13 +1,13 @@
 import 'package:fitness_app/api_client/api_requests.dart';
 import 'package:flutter/material.dart';
+
 import '../helper/const.dart';
 import '../helper/text_styles.dart';
 import 'home_screen.dart';
-import 'login_screen.dart';
-import 'mainpage.dart';
 
 class CreateGroupScreen extends StatefulWidget {
   const CreateGroupScreen({Key? key}) : super(key: key);
+
   @override
   State<CreateGroupScreen> createState() => _CreateGroupScreen();
 }
@@ -39,9 +39,8 @@ class _CreateGroupScreen extends State<CreateGroupScreen> {
           ? const Center(child: CircularProgressIndicator())
           : Padding(
               padding: const EdgeInsets.all(18.0),
-              
               child: Form(
-                key : _createGroupFormKey,
+                key: _createGroupFormKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -68,9 +67,11 @@ class _CreateGroupScreen extends State<CreateGroupScreen> {
                           borderRadius: BorderRadius.circular(100),
                         ),
                         prefixIconColor: kPrimaryColor,
-                        floatingLabelStyle: const TextStyle(color: kPrimaryColor),
+                        floatingLabelStyle:
+                            const TextStyle(color: kPrimaryColor),
                         focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(width: 2, color: kPrimaryColor),
+                          borderSide:
+                              BorderSide(width: 2, color: kPrimaryColor),
                         ),
                       ),
                     ),
@@ -92,9 +93,11 @@ class _CreateGroupScreen extends State<CreateGroupScreen> {
                           borderRadius: BorderRadius.circular(100),
                         ),
                         prefixIconColor: kPrimaryColor,
-                        floatingLabelStyle: const TextStyle(color: kPrimaryColor),
+                        floatingLabelStyle:
+                            const TextStyle(color: kPrimaryColor),
                         focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(width: 2, color: kPrimaryColor),
+                          borderSide:
+                              BorderSide(width: 2, color: kPrimaryColor),
                         ),
                       ),
                     ),
@@ -116,9 +119,11 @@ class _CreateGroupScreen extends State<CreateGroupScreen> {
                           borderRadius: BorderRadius.circular(100),
                         ),
                         prefixIconColor: kPrimaryColor,
-                        floatingLabelStyle: const TextStyle(color: kPrimaryColor),
+                        floatingLabelStyle:
+                            const TextStyle(color: kPrimaryColor),
                         focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(width: 2, color: kPrimaryColor),
+                          borderSide:
+                              BorderSide(width: 2, color: kPrimaryColor),
                         ),
                       ),
                     ),
@@ -139,14 +144,14 @@ class _CreateGroupScreen extends State<CreateGroupScreen> {
                             await createNewGroup(
                               groupName: groupNameController.text.toString(),
                               stepGoal: stepGoalController.text.toString(),
-                              calorieGoal: calorieGoalController.text.toString(),
+                              calorieGoal:
+                                  calorieGoalController.text.toString(),
                             ).then((value) {
                               isLoading = false;
                               setState(() {});
                               var msg = "";
                               if (value.success ?? false) {
-                                msg =
-                                    "New Group Created Sucessfully";
+                                msg = "New Group Created Sucessfully";
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(

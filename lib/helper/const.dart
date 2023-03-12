@@ -41,6 +41,10 @@ const joinGroup = '/task/joinGroup';
 const addGoals = '/addGoals';
 const viewUserRecords = '/record/showUser';
 const getFriendData = '/friend/showUserFriend';
+const recordData = '/recordData';
+const calorieReset = '/calorieReset';
+const getGroups = '/task/show';
+
 const bearerToken = "token";
 
 const dummyApi = "https://jsonplaceholder.typicode.com/albums/1";

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:fitness_app/helper/storage_manager.dart';
+import 'package:fitness_app/model/groups_response.dart';
 import 'package:fitness_app/model/register_response.dart';
 import 'package:fitness_app/model/viewRecord_resopnse.dart';
 import 'package:http/http.dart' as http;
@@ -9,6 +10,7 @@ import 'package:http/http.dart' as http;
 import '../helper/const.dart';
 import '../model/addFriend_response.dart';
 import '../model/addGoals_response.dart';
+import '../model/basic_response.dart';
 import '../model/createGroup_response.dart';
 import '../model/edit_profile_response.dart';
 import '../model/joinGroup_response.dart';
@@ -31,7 +33,9 @@ Future<UserResponse> fetchUsers() async {
     throw Exception('Failed to load album');
   }
 }
+
 bool isLoading = false;
+
 Future<ProfileResponse> getUser() async {
   isLoading = true;
   var uri = Uri.parse(baseUrl + getDataofUser);
@@ -209,7 +213,6 @@ Future<RegisterResponse> registerUser({
   }
 }
 
-
 Future<EditProfile> editUserData({
   required String userName,
   required String height,
@@ -222,7 +225,7 @@ Future<EditProfile> editUserData({
   };
 
   var uri = Uri.parse(baseUrl + editProfile);
-  
+
   var token = await StorageManager.readData(bearerToken);
   // log('Token : $token');
 
@@ -269,7 +272,7 @@ Future<CreateGroup> createNewGroup({
   };
 
   var uri = Uri.parse(baseUrl + addGroup);
-  
+
   var token = await StorageManager.readData(bearerToken);
   // log('Token : $token');
 
@@ -312,7 +315,7 @@ Future<AddFriendResponse> addFriend({
   };
 
   var uri = Uri.parse(baseUrl + addFriends);
-  
+
   var token = await StorageManager.readData(bearerToken);
   // log('Token : $token');
 
@@ -355,7 +358,7 @@ Future<JoinGroupResponse> joinGroups({
   };
 
   var uri = Uri.parse(baseUrl + joinGroup);
-  
+
   var token = await StorageManager.readData(bearerToken);
   // log('Token : $token');
 
@@ -390,17 +393,48 @@ Future<JoinGroupResponse> joinGroups({
   }
 }
 
+Future<BasicResponse> recordDataApi() async {
+  var uri = Uri.parse(baseUrl + recordData);
+
+  var token = await StorageManager.readData(bearerToken);
+  // log('Token : $token');
+
+  final response = await http.post(
+    uri,
+    body: {},
+    headers: {
+      "Accept": "application/json",
+      "Authorization": "Bearer $token",
+    },
+  );
+
+  print("API URI: ${uri.toString()}");
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    print("BODY: ${response.body}");
+
+    var data = jsonDecode(response.body);
+    if (data["msg"] != null) {
+      print("ALERT MESSAGE ${data["msg"]}");
+    }
+    return BasicResponse.fromJson(data);
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to login');
+  }
+}
+
 Future<AddGoalsResponse> addGoal({
   required String calorieGoals,
   required String stepsGoals,
 }) async {
-  var dataMap = {
-    "calorieGoal" : calorieGoals,
-    "stepsGoal" : stepsGoals
-  };
+  var dataMap = {"calorieGoal": calorieGoals, "stepsGoal": stepsGoals};
 
   var uri = Uri.parse(baseUrl + addGoals);
-  
+
   var token = await StorageManager.readData(bearerToken);
   // log('Token : $token');
 
@@ -428,6 +462,73 @@ Future<AddGoalsResponse> addGoal({
       print("ALERT MESSAGE ${data["msg"]}");
     }
     return AddGoalsResponse.fromJson(data);
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to login');
+  }
+}
+
+Future<BasicResponse> calorieResetApi() async {
+  var uri = Uri.parse(baseUrl + calorieReset);
+
+  var token = await StorageManager.readData(bearerToken);
+  // log('Token : $token');
+
+  final response = await http.post(
+    uri,
+    body: {},
+    headers: {
+      "Accept": "application/json",
+      "Authorization": "Bearer $token",
+    },
+  );
+
+  print("API URI: ${uri.toString()}");
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    print("BODY: ${response.body}");
+
+    var data = jsonDecode(response.body);
+    if (data["msg"] != null) {
+      print("ALERT MESSAGE ${data["msg"]}");
+    }
+    return BasicResponse.fromJson(data);
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to login');
+  }
+}
+
+Future<GroupsResponse> getGroupsApi() async {
+  var uri = Uri.parse(baseUrl + getGroups);
+
+  var token = await StorageManager.readData(bearerToken);
+  // log('Token : $token');
+
+  final response = await http.get(
+    uri,
+    headers: {
+      "Accept": "application/json",
+      "Authorization": "Bearer $token",
+    },
+  );
+
+  print("API URI: ${uri.toString()}");
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    print("BODY: ${response.body}");
+
+    var data = jsonDecode(response.body);
+    if (data["msg"] != null) {
+      print("ALERT MESSAGE ${data["msg"]}");
+    }
+    return GroupsResponse.fromJson(data);
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.

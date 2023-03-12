@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fitness_app/api_client/api_requests.dart';
 import 'package:fitness_app/helper/text_styles.dart';
 import 'package:fitness_app/model/viewRecord_resopnse.dart';
@@ -12,7 +14,10 @@ class InsightsScreen extends StatefulWidget {
 }
 
 class _InsightsScreen extends State<InsightsScreen> {
-  late ViewRecord user;
+  late ViewRecord insights;
+  late String maxStreak;
+  late String averageSteps;
+  late String averageKCals;
 
   var isLoading = true;
 
@@ -28,11 +33,14 @@ class _InsightsScreen extends State<InsightsScreen> {
   viewRecord() async {
     isLoading = true;
     setState(() {});
-    user = await viewUserRecord();
+    insights = await viewUserRecord();
+    maxStreak = insights.data!.first.maxStreaks!.toString();
+    averageKCals = insights.data!.first.averageCalories!.toString();
+    averageSteps = insights.data!.first.averageSteps!.toString();
     isLoading = false;
     setState(() {});
 
-    print("Users: ${user.toString()}");
+    log("Users: ${insights.toString()}");
   }
 
   @override
@@ -72,30 +80,30 @@ class _InsightsScreen extends State<InsightsScreen> {
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
+                            children: [
+                              const Text(
                                 "Streaks.",
                                 style: TextStyle(
                                     color: Colors.white12,
                                     fontSize: 24,
                                     fontWeight: FontWeight.bold),
                               ),
-                              Text(
-                                "current streak",
+                              const Text(
+                                "Current streak",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold),
                               ),
-                              Text(
+                              const Text(
                                 "76",
                                 style: TextStyle(
                                     color: Colors.red,
                                     fontSize: 33,
                                     fontWeight: FontWeight.bold),
                               ),
-                              Text("Your All time high was 89.",
-                                  style: TextStyle(
+                              Text("Your All time high was $maxStreak.",
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 16,
                                   )
@@ -137,19 +145,19 @@ class _InsightsScreen extends State<InsightsScreen> {
                                 fontWeight: FontWeight.bold),
                           ),
                           Row(
-                            children: const [
+                            children: [
                               Text(
-                                "7,622",
-                                style: TextStyle(
+                                averageSteps,
+                                style: const TextStyle(
                                   color: Colors.blue,
                                   fontSize: 26,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 20,
                               ),
-                              Text(
+                              const Text(
                                 "steps per day",
                                 style: TextStyle(
                                   color: Colors.white12,
@@ -203,19 +211,19 @@ class _InsightsScreen extends State<InsightsScreen> {
                                 fontWeight: FontWeight.bold),
                           ),
                           Row(
-                            children: const [
+                            children: [
                               Text(
-                                "622",
-                                style: TextStyle(
+                                averageKCals,
+                                style: const TextStyle(
                                   color: Colors.blue,
                                   fontSize: 26,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 20,
                               ),
-                              Text(
+                              const Text(
                                 "kcals per day",
                                 style: TextStyle(
                                   color: Colors.white12,
@@ -225,8 +233,8 @@ class _InsightsScreen extends State<InsightsScreen> {
                               ),
                             ],
                           ),
-                          Row(
-                            children: const [
+                          const Row(
+                            children: [
                               Text(
                                 "Recommended calories=",
                                 style: TextStyle(
