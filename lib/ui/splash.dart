@@ -13,6 +13,36 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    Future.delayed(const Duration(seconds: 2), () async {
+      await Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => NewScreen(),
+          ));
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Image.asset("assets/947a9f1acf2478edc6e97b9a17ef75aa.jpg"),
+      ),
+    );
+  }
+}
+
+class NewScreen extends StatefulWidget {
+  const NewScreen({Key? key}) : super(key: key);
+
+  @override
+  State<NewScreen> createState() => _NewScreenState();
+}
+
+class _NewScreenState extends State<NewScreen> {
   bool isLoggedIn = false;
 
   isUserLoggedIn() async {
@@ -50,13 +80,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text(
-          "Fitness App",
-          style: TextStyle(color: Colors.white, fontSize: 18),
-        ),
-      ),
-    );
+    return Scaffold();
   }
 }

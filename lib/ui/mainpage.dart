@@ -35,11 +35,11 @@ class _MainPageState extends State<MainPage> {
   bool isLoading = false;
   int selectedIndex = 0;
   bool switchvalue = false;
-  final bottomNavScreens = const [
-    HomeScreen(),
+  final bottomNavScreens =  [
+    const HomeScreen(),
     Calorie(),
-    InsightsScreen(),
-    LeaderboardScreen(),
+    const InsightsScreen(),
+    const LeaderboardScreen(),
   ];
 
   @override

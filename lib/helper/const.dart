@@ -38,6 +38,8 @@ const getDataofUser = '/showUser';
 const addGroup = '/task/add';
 const addFriends = '/addFriends';
 const joinGroup = '/task/joinGroup';
+const addGoals = '/addGoals';
+const viewUserRecords = '/record/showUser';
 const getFriendData = '/friend/showUserFriend';
 const bearerToken = "token";
 

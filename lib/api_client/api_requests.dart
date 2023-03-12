@@ -3,10 +3,12 @@ import 'dart:developer';
 
 import 'package:fitness_app/helper/storage_manager.dart';
 import 'package:fitness_app/model/register_response.dart';
+import 'package:fitness_app/model/viewRecord_resopnse.dart';
 import 'package:http/http.dart' as http;
 
 import '../helper/const.dart';
 import '../model/addFriend_response.dart';
+import '../model/addGoals_response.dart';
 import '../model/createGroup_response.dart';
 import '../model/edit_profile_response.dart';
 import '../model/joinGroup_response.dart';
@@ -29,9 +31,38 @@ Future<UserResponse> fetchUsers() async {
     throw Exception('Failed to load album');
   }
 }
-
+bool isLoading = false;
 Future<ProfileResponse> getUser() async {
+  isLoading = true;
   var uri = Uri.parse(baseUrl + getDataofUser);
+  log('URL : $uri');
+  var token = await StorageManager.readData(bearerToken);
+  log('Token : $token');
+  final response = await http.get(
+    uri,
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer $token"
+    },
+  );
+
+  if (response.statusCode == 200) {
+    isLoading = false;
+    log(response.body.toString());
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    return ProfileResponse.fromJson(jsonDecode(response.body));
+  } else {
+    isLoading = false;
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load data');
+  }
+}
+
+Future<ViewRecord> viewUserRecord() async {
+  var uri = Uri.parse(baseUrl + viewUserRecords);
   log('URL : $uri');
   var token = await StorageManager.readData(bearerToken);
   log('Token : $token');
@@ -48,7 +79,7 @@ Future<ProfileResponse> getUser() async {
     log(response.body.toString());
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    return ProfileResponse.fromJson(jsonDecode(response.body));
+    return ViewRecord.fromJson(jsonDecode(response.body));
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.
@@ -232,9 +263,9 @@ Future<CreateGroup> createNewGroup({
   required String stepGoal,
 }) async {
   var dataMap = {
-    "groupName": groupName,
-    "calorieGoal": calorieGoal,
-    "stepGoal": stepGoal,
+    "task_name": groupName,
+    "calorie_goals": calorieGoal,
+    "steps_goals": stepGoal,
   };
 
   var uri = Uri.parse(baseUrl + addGroup);
@@ -334,7 +365,7 @@ Future<JoinGroupResponse> joinGroups({
     headers: {
       "Content-Type": "application/json",
       "Accept": "application/json",
-      // "Authorization": "Bearer $token"
+      "Authorization": "Bearer $token"
     },
   );
 
@@ -352,6 +383,51 @@ Future<JoinGroupResponse> joinGroups({
       print("ALERT MESSAGE ${data["msg"]}");
     }
     return JoinGroupResponse.fromJson(data);
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to login');
+  }
+}
+
+Future<AddGoalsResponse> addGoal({
+  required String calorieGoals,
+  required String stepsGoals,
+}) async {
+  var dataMap = {
+    "calorieGoal" : calorieGoals,
+    "stepsGoal" : stepsGoals
+  };
+
+  var uri = Uri.parse(baseUrl + addGoals);
+  
+  var token = await StorageManager.readData(bearerToken);
+  // log('Token : $token');
+
+  final response = await http.post(
+    uri,
+    body: jsonEncode(dataMap),
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer $token"
+    },
+  );
+
+  print("API URI: ${uri.toString()}");
+
+  print("BODY: $dataMap");
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    print("BODY: ${response.body}");
+
+    var data = jsonDecode(response.body);
+    if (data["msg"] != null) {
+      print("ALERT MESSAGE ${data["msg"]}");
+    }
+    return AddGoalsResponse.fromJson(data);
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.

@@ -1,105 +1,105 @@
-import 'package:fitness_app/helper/text_styles.dart';
-import 'package:flutter/material.dart';
 
-class Calorie extends StatelessWidget {
-  const Calorie({Key? key}) : super(key: key);
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../model/search.dart';
+
+class Calorie extends StatefulWidget {
+  @override
+  State<Calorie> createState() => _CalorieState();
+}
+
+class _CalorieState extends State<Calorie> {
+  final FoodController foodController = Get.put(FoodController());
+
+  final searchController = TextEditingController();
+
+  List _newList = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: ListView(
       children: [
-        const SizedBox(
-          height: 40,
-        ),
-        const Text(
-          "Calorie Tracker",
+        Text(
+          "Calories Tracker",
           style: TextStyle(
-            color: Colors.white,
-            fontSize: 35,
-            fontWeight: FontWeight.bold,
-          ),
+              fontSize: 28, fontWeight: FontWeight.w500, color: Colors.red),
         ),
         const SizedBox(
-          height: 4,
+          height: 20,
         ),
-        const Text(
-          "Disciplinary Eating Habits",
-          style: TextStyle(
-            color: Colors.white24,
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
+        TextField(
+          controller: searchController,
+          onChanged: (value) => foodController.setSearchQuery(value),
+          decoration: InputDecoration(
+            hintText: 'Search for food...',
+            fillColor: Colors.white,
+            filled: true,
+            hintStyle: TextStyle(color: Colors.black),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(18)),
           ),
+          style: TextStyle(color: Colors.red),
         ),
         const SizedBox(
-          height: 45,
+          height: 20,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-             Text(
-              "Recommended Calorie:",
-              style: TextStyle(
-                color: Colors.cyan,
-                fontSize: 25,
-              ),
-            ),
-             Text(
-              "9000",
-              style: TextStyle(
-                color: Colors.green,
-                fontSize: 26,
-              ),
-            ),
-          ],
+        Container(
+          height: 350,
+          child: Obx(() {
+            if (foodController.isLoading.value) {
+              return Center(child: CircularProgressIndicator());
+            } else {
+              return ListView.builder(
+                itemCount: foodController.filteredList.length,
+                itemBuilder: (context, index) {
+                  var food = foodController.filteredList[index];
+                  return ListTile(
+                    onTap: () {
+                      setState(() {
+                        _newList.add(
+                          foodController.filteredList[index].name,
+                        );
+                      });
+                    },
+                    title: Text(
+                      food.name.toString(),
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    trailing: Text(
+                      food.calories.toString(),
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  );
+                },
+              );
+            }
+          }),
         ),
         const SizedBox(
           height: 30,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text(
-              "Foods",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 25,
-              ),
-            ),
-            Expanded(
-              child: TextFormField(
-                decoration: InputDecoration(
-                    fillColor: Colors.white24,
-                    hintText: "search",
-                    icon: const Icon(Icons.search),
-                    filled: true,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(18))),
-              ),
-            ),
-          ],
+        Text(
+          "Selected Food",
+          style: TextStyle(color: Colors.blue, fontSize: 28),
         ),
         const SizedBox(
-          height: 20,
+          height: 10,
         ),
-         Text(
-          "1.Foods     -      200kcals",
-          style: normalTextStyle.copyWith(),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-         Text(
-          "1.Foods     -      200kcals",
-          style: normalTextStyle.copyWith(),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-         Text(
-          "1.Foods     -      200kcals",
-          style: normalTextStyle.copyWith()
-        ),
+        Container(
+            height: 152,
+            child: ListView.builder(
+              itemCount: _newList.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    '${_newList[index]}',
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                );
+              },
+            ))
       ],
     ));
   }
