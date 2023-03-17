@@ -38,8 +38,8 @@ class _MainPageState extends State<MainPage> {
   final bottomNavScreens =  [
     const HomeScreen(),
     Calorie(),
-    const InsightsScreen(),
     const LeaderboardScreen(),
+    const Profile(),
   ];
 
   @override
@@ -77,25 +77,25 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ),
                 ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.person_outline,
-                    color: Colors.blue,
-                  ),
-                  title: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Profile(),
-                          ));
-                    },
-                    child: const Text(
-                      'Profile',
-                      style: TextStyle(fontSize: 16, color: Colors.white),
-                    ),
-                  ),
-                ),
+                // ListTile(
+                //   leading: const Icon(
+                //     Icons.person_outline,
+                //     color: Colors.blue,
+                //   ),
+                //   title: InkWell(
+                //     onTap: () {
+                //       Navigator.push(
+                //           context,
+                //           MaterialPageRoute(
+                //             builder: (context) => const Profile(),
+                //           ));
+                //     },
+                //     child: const Text(
+                //       'Profile',
+                //       style: TextStyle(fontSize: 16, color: Colors.white),
+                //     ),
+                //   ),
+                // ),
                 ListTile(
                   leading: const Icon(
                     Icons.notification_add_outlined,
@@ -166,7 +166,7 @@ class _MainPageState extends State<MainPage> {
                                       controller: friendIdController,
                                       validator: (value) {
                                         if (value!.isEmpty) {
-                                          return 'Weight field is required';
+                                          return 'ID is required';
                                         }
                                         return null;
                                       },
@@ -313,12 +313,12 @@ class _MainPageState extends State<MainPage> {
             BottomNavigationBarItem(
               backgroundColor: Colors.black,
               icon: Icon(Icons.stacked_bar_chart),
-              label: "Insights",
+              label: "Friends",
             ),
             BottomNavigationBarItem(
               backgroundColor: Colors.black,
               icon: Icon(Icons.group),
-              label: "Groups",
+              label: "Profile",
             )
           ],
         ),

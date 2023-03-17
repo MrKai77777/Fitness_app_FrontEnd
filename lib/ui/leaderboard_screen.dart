@@ -60,7 +60,7 @@ class _LeaderboardScreen extends State<LeaderboardScreen> {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  "Leader Board",
+                  "Friends",
                   style: subTitleTextStyle.copyWith(
                     color: kRedColor,
                   ),

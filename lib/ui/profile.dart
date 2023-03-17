@@ -26,6 +26,7 @@ class _Profile extends State<Profile> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await calorieRecommenderApi();
       await getProfile();
     });
   }
@@ -43,14 +44,14 @@ class _Profile extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          "Profile",
-          style: subTitleTextStyle.copyWith(color: kPrimaryColor),
-        ),
-        backgroundColor: Colors.black12,
-      ),
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   title: Text(
+      //     "Profile",
+      //     style: subTitleTextStyle.copyWith(color: kPrimaryColor),
+      //   ),
+      //   backgroundColor: Colors.black12,
+      // ),
       body: isLoading
           ? const Center(
               child: CircularProgressIndicator(),
@@ -59,6 +60,10 @@ class _Profile extends State<Profile> {
               child: Container(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(children: [
+                   Text(
+                    "Profile" ,
+                    style: subTitleTextStyle.copyWith(color: Colors.red),
+                  ),
                   SizedBox(
                     width: 120,
                     height: 120,
@@ -113,6 +118,14 @@ class _Profile extends State<Profile> {
                       titles: "Weight",
                       icon: Icons.account_circle_rounded,
                       trailing: user.data?.weight.toString() ?? "N/A" ),
+                  ProfileWidget(
+                      titles: "Calorie Goal",
+                      icon: Icons.account_circle_rounded,
+                      trailing: user.data?.calorieGoal.toString() ?? "N/A" ),
+                  ProfileWidget(
+                      titles: "Step Goal",
+                      icon: Icons.account_circle_rounded,
+                      trailing: user.data?.stepsGoal.toString() ?? "N/A" ),
                   //   const Divider(color: Colors.grey),
                   //   const SizedBox(height: 10),
                   // const ProfileWidget(

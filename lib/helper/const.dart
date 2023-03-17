@@ -41,7 +41,10 @@ const joinGroup = '/task/joinGroup';
 const addGoals = '/addGoals';
 const viewUserRecords = '/record/showUser';
 const getFriendData = '/friend/showUserFriend';
+const createRecord = '/record/enter';
+const createFriend = '/friend/enter';
 const recordData = '/recordData';
+const calorieRecommend = '/calorie';
 const calorieReset = '/calorieReset';
 const getGroups = '/task/show';
 

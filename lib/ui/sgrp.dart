@@ -1,4 +1,5 @@
 import 'package:fitness_app/model/groups_response.dart';
+import 'package:fitness_app/ui/group_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../api_client/api_requests.dart';
@@ -9,13 +10,14 @@ import 'create_group_screen.dart';
 class grp extends StatefulWidget {
   const grp({Key? key}) : super(key: key);
 
+
   @override
   State<grp> createState() => _grp();
 }
 
 class _grp extends State<grp> {
   final _grpFormKey = GlobalKey<FormState>();
-
+  
   bool isLoading = false;
 
   late GroupsResponse groupsResponse;
@@ -43,6 +45,7 @@ class _grp extends State<grp> {
 
   @override
   Widget build(BuildContext context) {
+    
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -109,7 +112,7 @@ class _grp extends State<grp> {
                                             controller: groupIdController,
                                             validator: (value) {
                                               if (value!.isEmpty) {
-                                                return 'Weight field is required';
+                                                return 'ID is required';
                                               }
                                               return null;
                                             },
@@ -211,11 +214,21 @@ class _grp extends State<grp> {
                                   width: 10,
                                 ),
                                 Flexible(
-                                  child: Text(
-                                    "${groupsResponse.data![i].taskName}",
-                                    style: normalTextStyle.copyWith(
+                                  child: TextButton(
+                                    style: TextButton.styleFrom(
+                                      textStyle:normalTextStyle.copyWith(
                                       color: kPrimaryColor,
                                     ),
+                                    ),
+                                    onPressed: (){
+                                      Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => GroupScreen(groupI : i),
+                                    ),
+                                  );
+                                    },
+                                    child: Text("${groupsResponse.data![i].taskName}"),
                                   ),
                                 ),
                               ],

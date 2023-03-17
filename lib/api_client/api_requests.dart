@@ -53,7 +53,7 @@ Future<ProfileResponse> getUser() async {
 
   if (response.statusCode == 200) {
     isLoading = false;
-    log(response.body.toString());
+    print(response.body.toString());
     // If the server did return a 200 OK response,
     // then parse the JSON.
     return ProfileResponse.fromJson(jsonDecode(response.body));
@@ -80,7 +80,7 @@ Future<ViewRecord> viewUserRecord() async {
   );
 
   if (response.statusCode == 200) {
-    log(response.body.toString());
+    print(response.body.toString());
     // If the server did return a 200 OK response,
     // then parse the JSON.
     return ViewRecord.fromJson(jsonDecode(response.body));
@@ -106,7 +106,7 @@ Future<ShowFriends> getFriends() async {
   );
 
   if (response.statusCode == 200) {
-    log(response.body.toString());
+    print(response.body.toString());
     // If the server did return a 200 OK response,
     // then parse the JSON.
     return ShowFriends.fromJson(jsonDecode(response.body));
@@ -144,7 +144,7 @@ Future<LoginResponse> loginUser(
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    log("BODY: ${response.body}");
+    print("BODY: ${response.body}");
 
     var data = jsonDecode(response.body);
     if (data["msg"] != null) {
@@ -199,7 +199,7 @@ Future<RegisterResponse> registerUser({
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    log("BODY: ${response.body}");
+    print("BODY: ${response.body}");
 
     var data = jsonDecode(response.body);
     if (data["msg"] != null) {
@@ -239,9 +239,9 @@ Future<EditProfile> editUserData({
     },
   );
 
-  print("API URI: ${uri.toString()}");
+  log("API URI: ${uri.toString()}");
 
-  print("BODY: $dataMap");
+  log("BODY: $dataMap");
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -250,7 +250,7 @@ Future<EditProfile> editUserData({
 
     var data = jsonDecode(response.body);
     if (data["msg"] != null) {
-      print("ALERT MESSAGE ${data["msg"]}");
+      log("ALERT MESSAGE ${data["msg"]}");
     }
     return EditProfile.fromJson(data);
   } else {
@@ -286,9 +286,9 @@ Future<CreateGroup> createNewGroup({
     },
   );
 
-  print("API URI: ${uri.toString()}");
+  log("API URI: ${uri.toString()}");
 
-  print("BODY: $dataMap");
+  log("BODY: $dataMap");
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -297,7 +297,7 @@ Future<CreateGroup> createNewGroup({
 
     var data = jsonDecode(response.body);
     if (data["msg"] != null) {
-      print("ALERT MESSAGE ${data["msg"]}");
+      log("ALERT MESSAGE ${data["msg"]}");
     }
     return CreateGroup.fromJson(data);
   } else {
@@ -329,9 +329,9 @@ Future<AddFriendResponse> addFriend({
     },
   );
 
-  print("API URI: ${uri.toString()}");
+  log("API URI: ${uri.toString()}");
 
-  print("BODY: $dataMap");
+  log("BODY: $dataMap");
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -340,7 +340,7 @@ Future<AddFriendResponse> addFriend({
 
     var data = jsonDecode(response.body);
     if (data["msg"] != null) {
-      print("ALERT MESSAGE ${data["msg"]}");
+      log("ALERT MESSAGE ${data["msg"]}");
     }
     return AddFriendResponse.fromJson(data);
   } else {
@@ -372,9 +372,9 @@ Future<JoinGroupResponse> joinGroups({
     },
   );
 
-  print("API URI: ${uri.toString()}");
+  log("API URI: ${uri.toString()}");
 
-  print("BODY: $dataMap");
+  log("BODY: $dataMap");
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -383,7 +383,7 @@ Future<JoinGroupResponse> joinGroups({
 
     var data = jsonDecode(response.body);
     if (data["msg"] != null) {
-      print("ALERT MESSAGE ${data["msg"]}");
+      log("ALERT MESSAGE ${data["msg"]}");
     }
     return JoinGroupResponse.fromJson(data);
   } else {
@@ -408,7 +408,7 @@ Future<BasicResponse> recordDataApi() async {
     },
   );
 
-  print("API URI: ${uri.toString()}");
+  log("API URI: ${uri.toString()}");
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -417,7 +417,7 @@ Future<BasicResponse> recordDataApi() async {
 
     var data = jsonDecode(response.body);
     if (data["msg"] != null) {
-      print("ALERT MESSAGE ${data["msg"]}");
+      log("ALERT MESSAGE ${data["msg"]}");
     }
     return BasicResponse.fromJson(data);
   } else {
@@ -448,7 +448,7 @@ Future<AddGoalsResponse> addGoal({
     },
   );
 
-  print("API URI: ${uri.toString()}");
+  log("API URI: ${uri.toString()}");
 
   print("BODY: $dataMap");
 
@@ -459,7 +459,7 @@ Future<AddGoalsResponse> addGoal({
 
     var data = jsonDecode(response.body);
     if (data["msg"] != null) {
-      print("ALERT MESSAGE ${data["msg"]}");
+      log("ALERT MESSAGE ${data["msg"]}");
     }
     return AddGoalsResponse.fromJson(data);
   } else {
@@ -484,7 +484,7 @@ Future<BasicResponse> calorieResetApi() async {
     },
   );
 
-  print("API URI: ${uri.toString()}");
+  log("API URI: ${uri.toString()}");
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -493,7 +493,41 @@ Future<BasicResponse> calorieResetApi() async {
 
     var data = jsonDecode(response.body);
     if (data["msg"] != null) {
-      print("ALERT MESSAGE ${data["msg"]}");
+      log("ALERT MESSAGE ${data["msg"]}");
+    }
+    return BasicResponse.fromJson(data);
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to login');
+  }
+}
+
+Future<BasicResponse> calorieRecommenderApi() async {
+  var uri = Uri.parse(baseUrl + calorieRecommend);
+
+  var token = await StorageManager.readData(bearerToken);
+  // log('Token : $token');
+
+  final response = await http.post(
+    uri,
+    body: {},
+    headers: {
+      "Accept": "application/json",
+      "Authorization": "Bearer $token",
+    },
+  );
+
+  log("API URI: ${uri.toString()}");
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    print("BODY: ${response.body}");
+
+    var data = jsonDecode(response.body);
+    if (data["msg"] != null) {
+      log("ALERT MESSAGE ${data["msg"]}");
     }
     return BasicResponse.fromJson(data);
   } else {
@@ -517,7 +551,7 @@ Future<GroupsResponse> getGroupsApi() async {
     },
   );
 
-  print("API URI: ${uri.toString()}");
+  log("API URI: ${uri.toString()}");
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -526,7 +560,7 @@ Future<GroupsResponse> getGroupsApi() async {
 
     var data = jsonDecode(response.body);
     if (data["msg"] != null) {
-      print("ALERT MESSAGE ${data["msg"]}");
+      log("ALERT MESSAGE ${data["msg"]}");
     }
     return GroupsResponse.fromJson(data);
   } else {
@@ -535,3 +569,72 @@ Future<GroupsResponse> getGroupsApi() async {
     throw Exception('Failed to login');
   }
 }
+
+Future<BasicResponse> createRecordApi() async {
+  var uri = Uri.parse(baseUrl + createRecord);
+
+  var token = await StorageManager.readData(bearerToken);
+  // log('Token : $token');
+
+  final response = await http.post(
+    uri,
+    body: {},
+    headers: {
+      "Accept": "application/json",
+      "Authorization": "Bearer $token",
+    },
+  );
+
+  log("API URI: ${uri.toString()}");
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    print("BODY: ${response.body}");
+
+    var data = jsonDecode(response.body);
+    if (data["msg"] != null) {
+      log("ALERT MESSAGE ${data["msg"]}");
+    }
+    return BasicResponse.fromJson(data);
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to login');
+  }
+}
+
+Future<BasicResponse> createFriendRecordApi() async {
+  var uri = Uri.parse(baseUrl + createFriend);
+
+  var token = await StorageManager.readData(bearerToken);
+  // log('Token : $token');
+
+  final response = await http.post(
+    uri,
+    body: {},
+    headers: {
+      "Accept": "application/json",
+      "Authorization": "Bearer $token",
+    },
+  );
+
+  log("API URI: ${uri.toString()}");
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    print("BODY: ${response.body}");
+
+    var data = jsonDecode(response.body);
+    if (data["msg"] != null) {
+      log("ALERT MESSAGE ${data["msg"]}");
+    }
+    return BasicResponse.fromJson(data);
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to login');
+  }
+}
+

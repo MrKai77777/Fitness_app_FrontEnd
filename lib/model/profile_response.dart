@@ -37,6 +37,7 @@ class Data {
   int? streaks;
   int? calorieGoal;
   int? stepsGoal;
+  int? recommendedCalories;
   int? iV;
 
   Data(
@@ -55,11 +56,12 @@ class Data {
       this.streaks,
       this.calorieGoal,
       this.stepsGoal,
+      this.recommendedCalories,
       this.iV});
 
   @override
   String toString() {
-    return 'Data{sId: $sId, firstname: $firstname, lastname: $lastname, username: $username, age: $age, password: $password, email: $email, weight: $weight, height: $height, gender: $gender, calorieIngested: $calorieIngested,stepsWalked: $stepsWalked, streaks: $streaks, calorieGoal : $calorieGoal,stepsGoal : $stepsGoal,iV: $iV}';
+    return 'Data{sId: $sId, firstname: $firstname, lastname: $lastname, username: $username, age: $age, password: $password, email: $email, weight: $weight, height: $height, gender: $gender, calorieIngested: $calorieIngested,stepsWalked: $stepsWalked, streaks: $streaks, calorieGoal : $calorieGoal,stepsGoal : $stepsGoal,"recommendedCalories":$recommendedCalories,iV: $iV}';
   }
 
   Data.fromJson(Map<String, dynamic> json) {
@@ -78,6 +80,7 @@ class Data {
     streaks = json['streaks'];
     calorieGoal = json['calorieGoal'];
     stepsGoal = json['stepsGoal'];
+    recommendedCalories = json['recommendedCalories'];
     iV = json['__v'];
   }
 
@@ -98,6 +101,7 @@ class Data {
     data['streaks'] = this.streaks;
     data['calorieGoal'] = this.calorieGoal;
     data['stepsGoal'] = this.stepsGoal;
+    data['recommendedCalories'] = this.recommendedCalories;
     data['__v'] = this.iV;
     return data;
   }

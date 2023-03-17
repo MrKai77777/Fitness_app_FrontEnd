@@ -21,7 +21,7 @@ class _CalorieState extends State<Calorie> {
     return Scaffold(
         body: ListView(
       children: [
-        Text(
+        const Text(
           "Calories Tracker",
           style: TextStyle(
               fontSize: 28, fontWeight: FontWeight.w500, color: Colors.red),
@@ -36,10 +36,10 @@ class _CalorieState extends State<Calorie> {
             hintText: 'Search for food...',
             fillColor: Colors.white,
             filled: true,
-            hintStyle: TextStyle(color: Colors.black),
+            hintStyle: const TextStyle(color: Colors.black),
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(18)),
           ),
-          style: TextStyle(color: Colors.red),
+          style: const TextStyle(color: Colors.red),
         ),
         const SizedBox(
           height: 20,
@@ -48,7 +48,7 @@ class _CalorieState extends State<Calorie> {
           height: 350,
           child: Obx(() {
             if (foodController.isLoading.value) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else {
               return ListView.builder(
                 itemCount: foodController.filteredList.length,
@@ -64,11 +64,11 @@ class _CalorieState extends State<Calorie> {
                     },
                     title: Text(
                       food.name.toString(),
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ),
                     trailing: Text(
                       food.calories.toString(),
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ),
                   );
                 },
@@ -79,7 +79,7 @@ class _CalorieState extends State<Calorie> {
         const SizedBox(
           height: 30,
         ),
-        Text(
+        const Text(
           "Selected Food",
           style: TextStyle(color: Colors.blue, fontSize: 28),
         ),
@@ -95,7 +95,7 @@ class _CalorieState extends State<Calorie> {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     '${_newList[index]}',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
                   ),
                 );
               },

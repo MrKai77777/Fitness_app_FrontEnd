@@ -1,4 +1,5 @@
 import 'package:fitness_app/api_client/api_requests.dart';
+import 'package:fitness_app/ui/sgrp.dart';
 import 'package:flutter/material.dart';
 
 import '../helper/const.dart';
@@ -155,7 +156,7 @@ class _CreateGroupScreen extends State<CreateGroupScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const HomeScreen(),
+                                    builder: (context) => const grp(),
                                   ),
                                 );
                               } else {

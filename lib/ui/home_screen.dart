@@ -7,6 +7,7 @@ import 'package:permission_handler/permission_handler.dart';
 import '../api_client/api_requests.dart';
 import '../helper/text_styles.dart';
 import '../model/profile_response.dart';
+import '../model/viewRecord_resopnse.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
@@ -19,22 +20,48 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  var isLoading = true;
+
   late Stream<StepCount> _stepCountStream;
   late Stream<PedestrianStatus> _pedestrianStatusStream;
   late ProfileResponse user;
+  late ViewRecord insights;
+  late String maxStreak;
+  late String averageSteps;
+  late String averageKCals;
 
-  var isLoading = true;
+  //var isLoading = true;
+
+  
   String _status = '?', _steps = '?';
 
   @override
   void initState() {
     super.initState();
+
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await createRecordApi();
+      await createFriendRecordApi();
+      await viewRecord();
       await getProfile();
       await recordDataApi();
       await calorieResetApi();
+      await initPlatformState();
     });
-    initPlatformState();
+    
+  }
+
+  viewRecord() async {
+    isLoading = true;
+    setState(() {});
+    insights = await viewUserRecord();
+    maxStreak = insights.data!.first.maxStreaks!.toString();
+    averageKCals = insights.data!.first.averageCalories!.toString();
+    averageSteps = insights.data!.first.averageSteps!.toString();
+    isLoading = false;
+    setState(() {});
+
+    print("Users: ${insights.toString()}");
   }
 
   getProfile() async {
@@ -76,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void initPlatformState() async {
+   initPlatformState() async {
     if (await Permission.activityRecognition.request().isGranted) {
       _pedestrianStatusStream = Pedometer.pedestrianStatusStream;
       _pedestrianStatusStream
@@ -93,9 +120,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    const values = 0.8;
+    const values = 0.5;
     return isLoading == true
-        ? Center(child: CircularProgressIndicator())
+        ? const Center(child: CircularProgressIndicator())
         : SingleChildScrollView(
             child: Stack(
               children: [
@@ -167,8 +194,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                           fontSize: 33,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    const Text("Your All time high was 89.",
-                                        style: TextStyle(
+                                     Text("Your All time high was $maxStreak.",
+                                        style:const TextStyle(
                                           color: Colors.white,
                                           fontSize: 16,
                                         )
@@ -219,16 +246,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                         Row(
                                           children: [
                                             Row(
-                                              children: const [
+                                              children:  [
                                                 Text(
-                                                  "7,622",
-                                                  style: TextStyle(
+                                                  averageSteps,
+                                                  style: const TextStyle(
                                                     color: Colors.blue,
                                                     fontSize: 26,
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
-                                                Text(
+                                                const Text(
                                                   "steps per day",
                                                   style: TextStyle(
                                                     color: Colors.white12,
@@ -287,19 +314,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Row(
-                                          children: const [
+                                          children:  [
                                             Text(
-                                              "2622",
-                                              style: TextStyle(
+                                              averageKCals,
+                                              style: const TextStyle(
                                                 color: Colors.blue,
                                                 fontSize: 26,
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 20,
                                             ),
-                                            Text(
+                                            const Text(
                                               "kcals per day",
                                               style: TextStyle(
                                                 color: Colors.white12,
@@ -310,8 +337,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ],
                                         ),
                                         Row(
-                                          children: const [
-                                            Text(
+                                          children:  [
+                                            const Text(
                                               "Recommended calories=",
                                               style: TextStyle(
                                                 color: Colors.white12,
@@ -319,13 +346,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 20,
                                             ),
                                             Text(
-                                              "2200",
-                                              style: TextStyle(
-                                                color: Colors.pink,
+                                              "${user.data?.recommendedCalories.toString()}",
+                                              style:const TextStyle(
+                                                color: Colors.red,
                                                 fontSize: 23,
                                                 fontWeight: FontWeight.bold,
                                               ),

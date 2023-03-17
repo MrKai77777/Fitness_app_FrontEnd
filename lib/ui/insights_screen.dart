@@ -233,8 +233,8 @@ class _InsightsScreen extends State<InsightsScreen> {
                               ),
                             ],
                           ),
-                          const Row(
-                            children: [
+                           Row(
+                            children: const [
                               Text(
                                 "Recommended calories=",
                                 style: TextStyle(
