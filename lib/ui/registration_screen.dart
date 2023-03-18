@@ -19,19 +19,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   bool isObscure = true;
 
   TextEditingController firstNameController =
-      TextEditingController(text: "Test");
+      TextEditingController(text: "");
   TextEditingController lastNameController =
-      TextEditingController(text: "User");
+      TextEditingController(text: "");
   TextEditingController userNameController =
-      TextEditingController(text: "testuser");
+      TextEditingController(text: "");
   TextEditingController emailController =
-      TextEditingController(text: "test@gmail.com");
+      TextEditingController(text: "");
   TextEditingController passwordController =
-      TextEditingController(text: "P@ssw0rd");
-  TextEditingController heightController = TextEditingController(text: "160");
-  TextEditingController weightController = TextEditingController(text: "80");
-  TextEditingController ageController = TextEditingController(text: "20");
-  TextEditingController genderController = TextEditingController(text: "Male");
+      TextEditingController(text: "");
+  TextEditingController heightController = TextEditingController(text: "");
+  TextEditingController weightController = TextEditingController(text: "");
+  TextEditingController ageController = TextEditingController(text: "");
+  TextEditingController genderController = TextEditingController(text: "");
 
   @override
   Widget build(BuildContext context) {

@@ -96,42 +96,42 @@ class _MainPageState extends State<MainPage> {
                 //     ),
                 //   ),
                 // ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.notification_add_outlined,
-                    color: Colors.blue,
-                  ),
-                  title: InkWell(
-                    onTap: () {},
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Notification',
-                          style: TextStyle(fontSize: 16, color: Colors.white),
-                        ),
-                        CupertinoSwitch(
-                          activeColor: CupertinoColors.activeBlue,
-                          trackColor: CupertinoColors.inactiveGray,
-                          thumbColor: CupertinoColors.white,
-                          value: switchvalue,
-                          onChanged: (value) {
-                            setState(() {
-                              switchvalue = value;
-                              //print(value);
-                              if (switchvalue == true) {
-                                print(value);
-                                notificationServices.scheduleNotifiation(
-                                    'Fitness App',
-                                    'Hydration is important.Drink Water');
-                              }
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                // ListTile(
+                //   leading: const Icon(
+                //     Icons.notification_add_outlined,
+                //     color: Colors.blue,
+                //   ),
+                //   title: InkWell(
+                //     onTap: () {},
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //       children: [
+                //         const Text(
+                //           'Notification',
+                //           style: TextStyle(fontSize: 16, color: Colors.white),
+                //         ),
+                //         CupertinoSwitch(
+                //           activeColor: CupertinoColors.activeBlue,
+                //           trackColor: CupertinoColors.inactiveGray,
+                //           thumbColor: CupertinoColors.white,
+                //           value: switchvalue,
+                //           onChanged: (value) {
+                //             setState(() {
+                //               switchvalue = value;
+                //               //print(value);
+                //               if (switchvalue == true) {
+                //                 print(value);
+                //                 notificationServices.scheduleNotifiation(
+                //                     'Fitness App',
+                //                     'Hydration is important.Drink Water');
+                //               }
+                //             });
+                //           },
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
                 ListTile(
                     leading: const Icon(
                       Icons.file_download_done_rounded,
@@ -307,8 +307,8 @@ class _MainPageState extends State<MainPage> {
             ),
             BottomNavigationBarItem(
               backgroundColor: Colors.black,
-              icon: Icon(Icons.file_download_done_rounded),
-              label: "Goals",
+              icon: Icon(Icons.restaurant_menu_sharp ),
+              label: "Tracker",
             ),
             BottomNavigationBarItem(
               backgroundColor: Colors.black,

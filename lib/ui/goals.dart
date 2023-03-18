@@ -181,126 +181,126 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-               const SizedBox(height: 20),
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.grey.shade900,
-                      borderRadius: const BorderRadius.all(Radius.circular(18))),
-                  height: 100,
-                  width: double.infinity,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          setState(() {
-                            kms--;
-                            if(kms <= 0){
-                              kms++;
-                            };
-                          });
-                        },
-                        icon: const Icon(
-                          Icons.remove_circle,
-                          color: Colors.blue,
-                        ),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            kms.toString(),
-                            style:const TextStyle(color: Colors.white, fontSize: 26.0),
-                          ),
-                          Row(
-                            children: const [
-                              Icon(
-                                CupertinoIcons.arrow_right,
-                                color: Colors.grey,
-                              ),
-                              Text("Kms",
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 18,
-                                  )),
-                            ],
-                          ),
-                        ],
-                      ),
-                      IconButton(
-                          onPressed: () {
-                            setState(() {
-                              kms++;
-                            });
-                            //print(steps);
-                          },
-                          icon:const Icon(
-                            Icons.add_circle,
-                            color: Colors.blue,
-                          )),
-                    ],
-                  ),
-                ),
-               const SizedBox(height: 20),
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.grey.shade900,
-                      borderRadius:const BorderRadius.all(Radius.circular(18))),
-                  height: 100,
-                  width: double.infinity,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          setState(() {
-                            mins = mins - 10;
-                            if(mins <= 0){
-                              mins = mins + 10;
-                            }
-                          });
-                        },
-                        icon: const Icon(
-                          Icons.remove_circle,
-                          color: Colors.blue,
-                        ),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            mins.toString(),
-                            style:const TextStyle(color: Colors.white, fontSize: 26.0),
-                          ),
-                          Row(
-                            children: const [
-                             Icon(
-                                Icons.timer,
-                                color: Colors.grey,
-                              ),
-                             Text("mins",
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 18,
-                                  )),
-                            ],
-                          ),
-                        ],
-                      ),
-                      IconButton(
-                          onPressed: () {
-                            setState(() {
-                              mins = mins + 10;
-                            });
-                           // print(steps);
-                          },
-                          icon: const Icon(
-                            Icons.add_circle,
-                            color: Colors.blue,
-                          )),
-                    ],
-                  ),
-                ),
+              //  const SizedBox(height: 20),
+              //   Container(
+              //     decoration: BoxDecoration(
+              //         color: Colors.grey.shade900,
+              //         borderRadius: const BorderRadius.all(Radius.circular(18))),
+              //     height: 100,
+              //     width: double.infinity,
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //       children: [
+              //         IconButton(
+              //           onPressed: () {
+              //             setState(() {
+              //               kms--;
+              //               if(kms <= 0){
+              //                 kms++;
+              //               };
+              //             });
+              //           },
+              //           icon: const Icon(
+              //             Icons.remove_circle,
+              //             color: Colors.blue,
+              //           ),
+              //         ),
+              //         Column(
+              //           mainAxisAlignment: MainAxisAlignment.center,
+              //           children: [
+              //             Text(
+              //               kms.toString(),
+              //               style:const TextStyle(color: Colors.white, fontSize: 26.0),
+              //             ),
+              //             Row(
+              //               children: const [
+              //                 Icon(
+              //                   CupertinoIcons.arrow_right,
+              //                   color: Colors.grey,
+              //                 ),
+              //                 Text("Kms",
+              //                     style: TextStyle(
+              //                       color: Colors.grey,
+              //                       fontSize: 18,
+              //                     )),
+              //               ],
+              //             ),
+              //           ],
+              //         ),
+              //         IconButton(
+              //             onPressed: () {
+              //               setState(() {
+              //                 kms++;
+              //               });
+              //               //print(steps);
+              //             },
+              //             icon:const Icon(
+              //               Icons.add_circle,
+              //               color: Colors.blue,
+              //             )),
+              //       ],
+              //     ),
+              //   ),
+              //  const SizedBox(height: 20),
+              //   Container(
+              //     decoration: BoxDecoration(
+              //         color: Colors.grey.shade900,
+              //         borderRadius:const BorderRadius.all(Radius.circular(18))),
+              //     height: 100,
+              //     width: double.infinity,
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //       children: [
+              //         IconButton(
+              //           onPressed: () {
+              //             setState(() {
+              //               mins = mins - 10;
+              //               if(mins <= 0){
+              //                 mins = mins + 10;
+              //               }
+              //             });
+              //           },
+              //           icon: const Icon(
+              //             Icons.remove_circle,
+              //             color: Colors.blue,
+              //           ),
+              //         ),
+              //         Column(
+              //           mainAxisAlignment: MainAxisAlignment.center,
+              //           children: [
+              //             Text(
+              //               mins.toString(),
+              //               style:const TextStyle(color: Colors.white, fontSize: 26.0),
+              //             ),
+              //             Row(
+              //               children: const [
+              //                Icon(
+              //                   Icons.timer,
+              //                   color: Colors.grey,
+              //                 ),
+              //                Text("mins",
+              //                     style: TextStyle(
+              //                       color: Colors.grey,
+              //                       fontSize: 18,
+              //                     )),
+              //               ],
+              //             ),
+              //           ],
+              //         ),
+              //         IconButton(
+              //             onPressed: () {
+              //               setState(() {
+              //                 mins = mins + 10;
+              //               });
+              //              // print(steps);
+              //             },
+              //             icon: const Icon(
+              //               Icons.add_circle,
+              //               color: Colors.blue,
+              //             )),
+              //       ],
+              //     ),
+              //   ),
                 const SizedBox(height: 30),
                 Center(
                   child: ElevatedButton(
@@ -308,7 +308,7 @@ class _HomePageState extends State<HomePage> {
                         padding: MaterialStatePropertyAll(
                             EdgeInsets.symmetric(vertical: 10, horizontal: 50)),
                         backgroundColor:
-                            MaterialStatePropertyAll(Colors.lightGreenAccent)),
+                            MaterialStatePropertyAll(kPrimaryColor)),
                     onPressed: () async {
                             FocusScope.of(context).unfocus();
                             if (_homePageStateFormKey.currentState!.validate()) {
@@ -343,7 +343,7 @@ class _HomePageState extends State<HomePage> {
                           },
                     child: const Text(
                       'Done',
-                      style: TextStyle(color: Colors.blueAccent, fontSize: 18),
+                      style: TextStyle(color: Colors.black, fontSize: 18),
                     ),
                   ),
                 ),

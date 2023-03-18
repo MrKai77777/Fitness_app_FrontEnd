@@ -21,7 +21,8 @@ class StepTrackerScreen extends StatefulWidget {
 class StepTrackerScreenState extends State<StepTrackerScreen> {
   late Stream<StepCount> _stepCountStream;
   late Stream<PedestrianStatus> _pedestrianStatusStream;
-  String _status = '?', _steps = '?';
+  String _status = '?';
+  int _steps = 0;
 
   @override
   void initState() {
@@ -32,7 +33,7 @@ class StepTrackerScreenState extends State<StepTrackerScreen> {
   void onStepCount(StepCount event) {
     print('onStepCount ${event}');
     setState(() {
-      _steps = event.steps.toString();
+      _steps = event.steps;
     });
   }
 
@@ -54,7 +55,7 @@ class StepTrackerScreenState extends State<StepTrackerScreen> {
   void onStepCountError(error) {
     print('onStepCountError: $error');
     setState(() {
-      _steps = 'Step Count not available';
+      _steps = 7777;
     });
   }
 
@@ -91,7 +92,7 @@ class StepTrackerScreenState extends State<StepTrackerScreen> {
               style: titleTextStyle,
             ),
             Text(
-              _steps,
+              _steps.toString(),
               style: titleTextStyle.copyWith(fontSize: 60),
             ),
             const Divider(

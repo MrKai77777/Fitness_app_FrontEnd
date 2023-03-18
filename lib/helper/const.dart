@@ -45,6 +45,8 @@ const createRecord = '/record/enter';
 const createFriend = '/friend/enter';
 const recordData = '/recordData';
 const calorieRecommend = '/calorie';
+const calorieCounter = '/counter';
+const getCalorie = '/calorie/showUser';
 const calorieReset = '/calorieReset';
 const getGroups = '/task/show';
 

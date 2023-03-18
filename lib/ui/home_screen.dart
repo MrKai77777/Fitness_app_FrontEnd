@@ -1,3 +1,4 @@
+import 'package:fitness_app/helper/const.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -33,7 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
   //var isLoading = true;
 
   
-  String _status = '?', _steps = '?';
+  String _status = '?';
+  int _steps = 0;
 
   @override
   void initState() {
@@ -61,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
     isLoading = false;
     setState(() {});
 
-    print("Users: ${insights.toString()}");
+   // log("Users: ${insights.toString()}");
   }
 
   getProfile() async {
@@ -71,25 +73,25 @@ class _HomeScreenState extends State<HomeScreen> {
     isLoading = false;
     setState(() {});
 
-    print("Users: ${user.toString()}");
+   // print("Users: ${user.toString()}");
   }
 
   void onStepCount(StepCount event) {
-    print('onStepCount ${event}');
+    // print('onStepCount ${event}');
     setState(() {
-      _steps = event.steps.toString();
+      _steps = (event.steps - 10000).abs();
     });
   }
 
   void onPedestrianStatusChanged(PedestrianStatus event) {
-    print('onPedestrianStatusChanged $event');
+   // print('onPedestrianStatusChanged $event');
     setState(() {
       _status = event.status;
     });
   }
 
   void onPedestrianStatusError(error) {
-    print('onPedestrianStatusError: $error');
+   // print('onPedestrianStatusError: $error');
     setState(() {
       _status = 'Pedestrian Status not available';
     });
@@ -97,9 +99,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void onStepCountError(error) {
-    print('onStepCountError: $error');
+   // print('onStepCountError: $error');
     setState(() {
-      _steps = '0';
+      _steps = 7777;
     });
   }
 
@@ -176,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     const Text(
                                       "Streaks.",
                                       style: TextStyle(
-                                          color: Colors.white12,
+                                          color: kPrimaryColor,
                                           fontSize: 24,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -198,6 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         style:const TextStyle(
                                           color: Colors.white,
                                           fontSize: 16,
+                                          fontWeight: FontWeight.bold
                                         )
                                         //fontWeight: FontWeight.bold),
                                         ),
@@ -233,7 +236,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 const Text(
                                   "Average",
                                   style: TextStyle(
-                                      color: Colors.white12,
+                                      color: kPrimaryColor,
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -256,9 +259,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   ),
                                                 ),
                                                 const Text(
-                                                  "steps per day",
+                                                  "    steps per day",
                                                   style: TextStyle(
-                                                    color: Colors.white12,
+                                                    color: Colors.white,
                                                     fontSize: 18,
                                                     fontWeight: FontWeight.bold,
                                                   ),
@@ -272,7 +275,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     const Icon(
                                       Icons.directions_walk_outlined,
                                       size: 70,
-                                      color: Colors.green,
+                                      color: Colors.red,
                                     ),
                                   ],
                                 )
@@ -301,7 +304,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 const Text(
                                   "Average",
                                   style: TextStyle(
-                                      color: Colors.white12,
+                                      color: kPrimaryColor,
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -329,7 +332,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             const Text(
                                               "kcals per day",
                                               style: TextStyle(
-                                                color: Colors.white12,
+                                                color: Colors.white,
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.bold,
                                               ),
@@ -341,7 +344,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             const Text(
                                               "Recommended calories=",
                                               style: TextStyle(
-                                                color: Colors.white12,
+                                                color: Colors.white,
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.bold,
                                               ),
@@ -363,8 +366,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                     const Icon(
                                       Icons.fastfood,
-                                      size: 50,
-                                      color: Colors.orange,
+                                      size: 30,
+                                      color: Colors.red,
                                     ),
                                   ],
                                 )

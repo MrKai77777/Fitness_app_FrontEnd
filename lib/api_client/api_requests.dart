@@ -11,6 +11,7 @@ import '../helper/const.dart';
 import '../model/addFriend_response.dart';
 import '../model/addGoals_response.dart';
 import '../model/basic_response.dart';
+import '../model/calorieCounter_response.dart';
 import '../model/createGroup_response.dart';
 import '../model/edit_profile_response.dart';
 import '../model/joinGroup_response.dart';
@@ -53,10 +54,39 @@ Future<ProfileResponse> getUser() async {
 
   if (response.statusCode == 200) {
     isLoading = false;
-    print(response.body.toString());
+    log(response.body.toString());
     // If the server did return a 200 OK response,
     // then parse the JSON.
     return ProfileResponse.fromJson(jsonDecode(response.body));
+  } else {
+    isLoading = false;
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load data');
+  }
+}
+
+Future<CalorieCounter> getCalorieData() async {
+  isLoading = true;
+  var uri = Uri.parse(baseUrl + getCalorie);
+  log('URL : $uri');
+  var token = await StorageManager.readData(bearerToken);
+  log('Token : $token');
+  final response = await http.get(
+    uri,
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer $token"
+    },
+  );
+
+  if (response.statusCode == 200) {
+    isLoading = false;
+    log(response.body.toString());
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    return CalorieCounter.fromJson(jsonDecode(response.body));
   } else {
     isLoading = false;
     // If the server did not return a 200 OK response,
@@ -80,7 +110,7 @@ Future<ViewRecord> viewUserRecord() async {
   );
 
   if (response.statusCode == 200) {
-    print(response.body.toString());
+    log(response.body.toString());
     // If the server did return a 200 OK response,
     // then parse the JSON.
     return ViewRecord.fromJson(jsonDecode(response.body));
@@ -106,7 +136,7 @@ Future<ShowFriends> getFriends() async {
   );
 
   if (response.statusCode == 200) {
-    print(response.body.toString());
+    log(response.body.toString());
     // If the server did return a 200 OK response,
     // then parse the JSON.
     return ShowFriends.fromJson(jsonDecode(response.body));
@@ -144,7 +174,7 @@ Future<LoginResponse> loginUser(
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    print("BODY: ${response.body}");
+    log("BODY: ${response.body}");
 
     var data = jsonDecode(response.body);
     if (data["msg"] != null) {
@@ -199,7 +229,7 @@ Future<RegisterResponse> registerUser({
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    print("BODY: ${response.body}");
+    log("BODY: ${response.body}");
 
     var data = jsonDecode(response.body);
     if (data["msg"] != null) {
@@ -246,7 +276,7 @@ Future<EditProfile> editUserData({
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    print("BODY: ${response.body}");
+    log("BODY: ${response.body}");
 
     var data = jsonDecode(response.body);
     if (data["msg"] != null) {
@@ -293,7 +323,7 @@ Future<CreateGroup> createNewGroup({
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    print("BODY: ${response.body}");
+    log("BODY: ${response.body}");
 
     var data = jsonDecode(response.body);
     if (data["msg"] != null) {
@@ -336,7 +366,7 @@ Future<AddFriendResponse> addFriend({
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    print("BODY: ${response.body}");
+    log("BODY: ${response.body}");
 
     var data = jsonDecode(response.body);
     if (data["msg"] != null) {
@@ -379,7 +409,7 @@ Future<JoinGroupResponse> joinGroups({
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    print("BODY: ${response.body}");
+    log("BODY: ${response.body}");
 
     var data = jsonDecode(response.body);
     if (data["msg"] != null) {
@@ -413,7 +443,7 @@ Future<BasicResponse> recordDataApi() async {
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    print("BODY: ${response.body}");
+    log("BODY: ${response.body}");
 
     var data = jsonDecode(response.body);
     if (data["msg"] != null) {
@@ -450,12 +480,53 @@ Future<AddGoalsResponse> addGoal({
 
   log("API URI: ${uri.toString()}");
 
-  print("BODY: $dataMap");
+  log("BODY: $dataMap");
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    print("BODY: ${response.body}");
+    log("BODY: ${response.body}");
+
+    var data = jsonDecode(response.body);
+    if (data["msg"] != null) {
+      log("ALERT MESSAGE ${data["msg"]}");
+    }
+    return AddGoalsResponse.fromJson(data);
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to login');
+  }
+}
+
+Future<AddGoalsResponse> countCalorieApi({
+  required String sauceName,
+}) async {
+  var dataMap = {"sauceName": sauceName};
+
+  var uri = Uri.parse(baseUrl + calorieCounter);
+
+  var token = await StorageManager.readData(bearerToken);
+  // log('Token : $token');
+
+  final response = await http.post(
+    uri,
+    body: jsonEncode(dataMap),
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer $token"
+    },
+  );
+
+  log("API URI: ${uri.toString()}");
+
+  log("BODY: $dataMap");
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    log("BODY: ${response.body}");
 
     var data = jsonDecode(response.body);
     if (data["msg"] != null) {
@@ -489,7 +560,7 @@ Future<BasicResponse> calorieResetApi() async {
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    print("BODY: ${response.body}");
+    log("BODY: ${response.body}");
 
     var data = jsonDecode(response.body);
     if (data["msg"] != null) {
@@ -523,7 +594,7 @@ Future<BasicResponse> calorieRecommenderApi() async {
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    print("BODY: ${response.body}");
+    log("BODY: ${response.body}");
 
     var data = jsonDecode(response.body);
     if (data["msg"] != null) {
@@ -556,7 +627,7 @@ Future<GroupsResponse> getGroupsApi() async {
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    print("BODY: ${response.body}");
+    log("BODY: ${response.body}");
 
     var data = jsonDecode(response.body);
     if (data["msg"] != null) {
@@ -590,7 +661,7 @@ Future<BasicResponse> createRecordApi() async {
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    print("BODY: ${response.body}");
+    log("BODY: ${response.body}");
 
     var data = jsonDecode(response.body);
     if (data["msg"] != null) {
@@ -624,7 +695,7 @@ Future<BasicResponse> createFriendRecordApi() async {
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    print("BODY: ${response.body}");
+    log("BODY: ${response.body}");
 
     var data = jsonDecode(response.body);
     if (data["msg"] != null) {

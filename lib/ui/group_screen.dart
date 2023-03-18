@@ -111,12 +111,12 @@ class _GroupScreen extends State<GroupScreen> {
                                 ),
                               ),
                               Text(
-                                "asd",
+                                "${groupsResponse.data![widget.groupI].includeUser![i].account!.first.firstname}",
                                 style: normalTextStyle,
                               ),
                               const Spacer(),
                               Text(
-                                "asd",
+                                "${groupsResponse.data![widget.groupI].includeUser![i].account!.first.streak}",
                                 style: normalTextStyle.copyWith(
                                   color: kRedColor,
                                 ),
@@ -132,7 +132,7 @@ class _GroupScreen extends State<GroupScreen> {
                           ),
                         );
                       },
-                      itemCount: 2),
+                      itemCount: groupsResponse.data![widget.groupI].includeUser!.length),
                 ),
               ],
             ),
