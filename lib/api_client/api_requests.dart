@@ -709,3 +709,37 @@ Future<BasicResponse> createFriendRecordApi() async {
   }
 }
 
+
+Future<BasicResponse> createFoodRecordApi() async {
+  var uri = Uri.parse(baseUrl + createFoodDB);
+
+  var token = await StorageManager.readData(bearerToken);
+  // log('Token : $token');
+
+  final response = await http.post(
+    uri,
+    body: {},
+    headers: {
+      "Accept": "application/json",
+      "Authorization": "Bearer $token",
+    },
+  );
+
+  log("API URI: ${uri.toString()}");
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    print("BODY: ${response.body}");
+
+    var data = jsonDecode(response.body);
+    if (data["msg"] != null) {
+      log("ALERT MESSAGE ${data["msg"]}");
+    }
+    return BasicResponse.fromJson(data);
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to login');
+  }
+}

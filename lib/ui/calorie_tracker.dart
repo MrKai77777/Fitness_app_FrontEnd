@@ -32,6 +32,7 @@ class _CalorieState extends State<Calorie> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await createFoodRecordApi();
       await countingCalorie();
       await getProfile();
     });
