@@ -30,12 +30,12 @@ class _HomeScreenState extends State<HomeScreen> {
   late String maxStreak;
   late String averageSteps;
   late String averageKCals;
-
+  
   //var isLoading = true;
 
   
   String _status = '?';
-  int _steps = 0;
+  num _steps = 1;
 
   @override
   void initState() {
@@ -43,12 +43,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await createRecordApi();
+      // print('a');
       await createFriendRecordApi();
+      // print('a');
       await viewRecord();
+     // print('a');
       await getProfile();
+     // print('a');
       await recordDataApi();
+     // print('a');
       await calorieResetApi();
+     // print('a');
       await initPlatformState();
+     // print('a');
     });
     
   }
@@ -95,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _status = 'Pedestrian Status not available';
     });
-    print(_status);
+   // print(_status);
   }
 
   void onStepCountError(error) {
@@ -122,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    const values = 0.5;
+    
     return isLoading == true
         ? const Center(child: CircularProgressIndicator())
         : SingleChildScrollView(
@@ -137,9 +144,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         Container(
                           width: 250,
                           height: 250,
-                          child: const CircularProgressIndicator(
+                          child: CircularProgressIndicator(
                             strokeWidth: 10,
-                            value: values,
+                            value: (user.data!.stepsGoal! / _steps).abs(),
                             backgroundColor: Colors.grey,
                           ),
                         ),
@@ -383,10 +390,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   top: size.height * 0.065,
                   child: Container(
                     color: Colors.transparent,
+                    height: size.height * 0.2,
+                    width: size.width * 0.9,
                     child: Center(
                       child: Text(
                         "Steps Count \n"
-                        "${_steps}",
+                        "$_steps",
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: Colors.white,
@@ -395,8 +404,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                    height: size.height * 0.2,
-                    width: size.width * 0.9,
                   ),
                 ),
               ],
@@ -405,9 +412,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class _SalesData {
-  _SalesData(this.year, this.sales);
+// class _SalesData {
+//   _SalesData(this.year, this.sales);
 
-  final String year;
-  final double sales;
-}
+//   final String year;
+//   final double sales;
+// }

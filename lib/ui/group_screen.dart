@@ -31,11 +31,11 @@ class _GroupScreen extends State<GroupScreen> {
   getGroups() async {
     isLoading = true;
     setState(() {});
-    groupsResponse = await getGroupsApi();
+    groupsResponse = await getGroupUserApi();
     isLoading = false;
     setState(() {});
 
-    print("Users: ${groupsResponse.toString()}");
+    // print("Users: ${groupsResponse.toString()}");
   }
 
   @override

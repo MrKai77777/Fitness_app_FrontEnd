@@ -641,6 +641,39 @@ Future<GroupsResponse> getGroupsApi() async {
   }
 }
 
+Future<GroupsResponse> getGroupUserApi() async {
+  var uri = Uri.parse(baseUrl + getGroupUser);
+
+  var token = await StorageManager.readData(bearerToken);
+  // log('Token : $token');
+
+  final response = await http.get(
+    uri,
+    headers: {
+      "Accept": "application/json",
+      "Authorization": "Bearer $token",
+    },
+  );
+
+  log("API URI: ${uri.toString()}");
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    log("BODY: ${response.body}");
+
+    var data = jsonDecode(response.body);
+    if (data["msg"] != null) {
+      log("ALERT MESSAGE ${data["msg"]}");
+    }
+    return GroupsResponse.fromJson(data);
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to login');
+  }
+}
+
 Future<BasicResponse> createRecordApi() async {
   var uri = Uri.parse(baseUrl + createRecord);
 

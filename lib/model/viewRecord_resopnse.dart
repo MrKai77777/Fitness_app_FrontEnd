@@ -31,10 +31,10 @@ class Data {
   String? accountId;
   String? firstname;
   List<Progress>? progress;
-  int? maxStreaks;
+  double? maxStreaks;
   int? iV;
-  int? averageCalories;
-  int? averageSteps;
+  double? averageCalories;
+  double? averageSteps;
 
   Data(
       {this.sId,
@@ -69,23 +69,23 @@ class Data {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['account_id'] = this.accountId;
-    data['firstname'] = this.firstname;
-    if (this.progress != null) {
-      data['progress'] = this.progress!.map((v) => v.toJson()).toList();
+    data['_id'] = sId;
+    data['account_id'] = accountId;
+    data['firstname'] = firstname;
+    if (progress != null) {
+      data['progress'] = progress!.map((v) => v.toJson()).toList();
     }
-    data['max_streaks'] = this.maxStreaks;
-    data['__v'] = this.iV;
-    data['averageCalories'] = this.averageCalories;
-    data['averageSteps'] = this.averageSteps;
+    data['max_streaks'] = maxStreaks;
+    data['__v'] = iV;
+    data['averageCalories'] = averageCalories;
+    data['averageSteps'] = averageSteps;
     return data;
   }
 }
 
 class Progress {
-  int? steps;
-  int? calorie;
+  double? steps;
+  double? calorie;
   String? date;
   String? sId;
 
@@ -109,10 +109,10 @@ class Progress {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['steps'] = this.steps;
-    data['calorie'] = this.calorie;
-    data['date'] = this.date;
-    data['_id'] = this.sId;
+    data['steps'] = steps;
+    data['calorie'] = calorie;
+    data['date'] = date;
+    data['_id'] = sId;
     return data;
   }
 }

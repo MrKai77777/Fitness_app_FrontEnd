@@ -31,29 +31,29 @@ class StepTrackerScreenState extends State<StepTrackerScreen> {
   }
 
   void onStepCount(StepCount event) {
-    print('onStepCount ${event}');
+    // log('onStepCount ${event}');
     setState(() {
       _steps = event.steps;
     });
   }
 
   void onPedestrianStatusChanged(PedestrianStatus event) {
-    print('onPedestrianStatusChanged $event');
+    // print('onPedestrianStatusChanged $event');
     setState(() {
       _status = event.status;
     });
   }
 
   void onPedestrianStatusError(error) {
-    print('onPedestrianStatusError: $error');
+    // print('onPedestrianStatusError: $error');
     setState(() {
       _status = 'Pedestrian Status not available';
     });
-    print(_status);
+    // print(_status);
   }
 
   void onStepCountError(error) {
-    print('onStepCountError: $error');
+    // print('onStepCountError: $error');
     setState(() {
       _steps = 7777;
     });

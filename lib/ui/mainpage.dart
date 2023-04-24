@@ -2,7 +2,7 @@ import 'package:fitness_app/helper/const.dart';
 import 'package:fitness_app/helper/storage_manager.dart';
 import 'package:fitness_app/ui/goals.dart';
 import 'package:fitness_app/ui/home_screen.dart';
-import 'package:fitness_app/ui/insights_screen.dart';
+// import 'package:fitness_app/ui/insights_screen.dart';
 import 'package:fitness_app/ui/profile.dart';
 import 'package:fitness_app/ui/sgrp.dart';
 import 'package:fitness_app/ui/step_tracker_screen.dart';
@@ -96,42 +96,42 @@ class _MainPageState extends State<MainPage> {
                 //     ),
                 //   ),
                 // ),
-                // ListTile(
-                //   leading: const Icon(
-                //     Icons.notification_add_outlined,
-                //     color: Colors.blue,
-                //   ),
-                //   title: InkWell(
-                //     onTap: () {},
-                //     child: Row(
-                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //       children: [
-                //         const Text(
-                //           'Notification',
-                //           style: TextStyle(fontSize: 16, color: Colors.white),
-                //         ),
-                //         CupertinoSwitch(
-                //           activeColor: CupertinoColors.activeBlue,
-                //           trackColor: CupertinoColors.inactiveGray,
-                //           thumbColor: CupertinoColors.white,
-                //           value: switchvalue,
-                //           onChanged: (value) {
-                //             setState(() {
-                //               switchvalue = value;
-                //               //print(value);
-                //               if (switchvalue == true) {
-                //                 print(value);
-                //                 notificationServices.scheduleNotifiation(
-                //                     'Fitness App',
-                //                     'Hydration is important.Drink Water');
-                //               }
-                //             });
-                //           },
-                //         ),
-                //       ],
-                //     ),
-                //   ),
-                // ),
+                ListTile(
+                  leading: const Icon(
+                    Icons.notification_add_outlined,
+                    color: Colors.blue,
+                  ),
+                  title: InkWell(
+                    onTap: () {},
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Notification',
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                        CupertinoSwitch(
+                          activeColor: CupertinoColors.activeBlue,
+                          trackColor: CupertinoColors.inactiveGray,
+                          thumbColor: CupertinoColors.white,
+                          value: switchvalue,
+                          onChanged: (value) {
+                            setState(() {
+                              switchvalue = value;
+                              //print(value);
+                              if (switchvalue == true) {
+                                // print(value);
+                                notificationServices.scheduleNotifiation(
+                                    'Fitness App',
+                                    'Hydration is important.Drink Water');
+                              }
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                 ListTile(
                     leading: const Icon(
                       Icons.file_download_done_rounded,

@@ -56,12 +56,12 @@ class Data {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['account_id'] = this.accountId;
-    if (this.foodIngested != null) {
-      data['foodIngested'] = this.foodIngested!.map((v) => v.toJson()).toList();
+    data['_id'] = sId;
+    data['account_id'] = accountId;
+    if (foodIngested != null) {
+      data['foodIngested'] = foodIngested!.map((v) => v.toJson()).toList();
     }
-    data['__v'] = this.iV;
+    data['__v'] = iV;
     return data;
   }
 }
@@ -89,9 +89,9 @@ class FoodIngested {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['sauceName'] = this.sauceName;
-    data['calories'] = this.calories;
-    data['_id'] = this.sId;
+    data['sauceName'] = sauceName;
+    data['calories'] = calories;
+    data['_id'] = sId;
     return data;
   }
 }

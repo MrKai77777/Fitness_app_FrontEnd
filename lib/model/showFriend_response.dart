@@ -54,13 +54,13 @@ class Data {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['account_id'] = this.accountId;
-    data['name'] = this.name;
-    if (this.friendList != null) {
-      data['friend_list'] = this.friendList!.map((v) => v.toJson()).toList();
+    data['_id'] = sId;
+    data['account_id'] = accountId;
+    data['name'] = name;
+    if (friendList != null) {
+      data['friend_list'] = friendList!.map((v) => v.toJson()).toList();
     }
-    data['__v'] = this.iV;
+    data['__v'] = iV;
     return data;
   }
 }
@@ -91,10 +91,10 @@ class FriendList {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['friend_id'] = this.friendId;
-    data['friend_name'] = this.friendName;
-    data['streaks'] = this.streaks;
-    data['_id'] = this.sId;
+    data['friend_id'] = friendId;
+    data['friend_name'] = friendName;
+    data['streaks'] = streaks;
+    data['_id'] = sId;
     return data;
   }
 }

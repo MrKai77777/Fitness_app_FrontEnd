@@ -50,6 +50,7 @@ const createFoodDB = '/createDBCounter';
 const getCalorie = '/calorie/showUser';
 const calorieReset = '/calorieReset';
 const getGroups = '/task/show';
+const getGroupUser = '/task/showUser';
 
 const bearerToken = "token";
 

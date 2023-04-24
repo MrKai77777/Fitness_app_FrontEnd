@@ -34,7 +34,7 @@ class _LeaderboardScreen extends State<LeaderboardScreen> {
     isLoading = false;
     setState(() {});
 
-    print("Users: ${user.toString()}");
+    // print("Users: ${user.toString()}");
   }
 
   @override

@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
       await Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => NewScreen(),
+            builder: (context) => const NewScreen(),
           ));
     });
     super.initState();
@@ -61,6 +61,7 @@ class _NewScreenState extends State<NewScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await isUserLoggedIn();
       if (isLoggedIn) {
+        // ignore: use_build_context_synchronously
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -68,6 +69,7 @@ class _NewScreenState extends State<NewScreen> {
           ),
         );
       } else {
+        // ignore: use_build_context_synchronously
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -80,6 +82,6 @@ class _NewScreenState extends State<NewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return const Scaffold();
   }
 }

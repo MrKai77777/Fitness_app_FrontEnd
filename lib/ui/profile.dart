@@ -1,4 +1,4 @@
-import 'dart:developer';
+// import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
@@ -38,7 +38,7 @@ class _Profile extends State<Profile> {
     isLoading = false;
     setState(() {});
 
-    print("Users: ${user.toString()}");
+    // print("Users: ${user.toString()}");
   }
 
   @override
@@ -154,7 +154,7 @@ class ProfileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Container(
-        width: 30,
+        width: 35,
         height: 30,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100),

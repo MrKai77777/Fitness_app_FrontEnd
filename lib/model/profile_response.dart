@@ -32,7 +32,7 @@ class Data {
   int? weight;
   int? height;
   String? gender;
-  int? calorieIngested;
+  double? calorieIngested;
   int? stepsWalked;
   int? streaks;
   int? calorieGoal;
@@ -86,23 +86,23 @@ class Data {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['firstname'] = this.firstname;
-    data['lastname'] = this.lastname;
-    data['username'] = this.username;
-    data['age'] = this.age;
-    data['password'] = this.password;
-    data['email'] = this.email;
-    data['weight'] = this.weight;
-    data['height'] = this.height;
-    data['gender'] = this.gender;
-    data['calorieIngested'] = this.calorieIngested;
-    data['stepsWalked'] = this.stepsWalked;
-    data['streaks'] = this.streaks;
-    data['calorieGoal'] = this.calorieGoal;
-    data['stepsGoal'] = this.stepsGoal;
-    data['recommendedCalories'] = this.recommendedCalories;
-    data['__v'] = this.iV;
+    data['_id'] = sId;
+    data['firstname'] = firstname;
+    data['lastname'] = lastname;
+    data['username'] = username;
+    data['age'] = age;
+    data['password'] = password;
+    data['email'] = email;
+    data['weight'] = weight;
+    data['height'] = height;
+    data['gender'] = gender;
+    data['calorieIngested'] = calorieIngested;
+    data['stepsWalked'] = stepsWalked;
+    data['streaks'] = streaks;
+    data['calorieGoal'] = calorieGoal;
+    data['stepsGoal'] = stepsGoal;
+    data['recommendedCalories'] = recommendedCalories;
+    data['__v'] = iV;
     return data;
   }
 }

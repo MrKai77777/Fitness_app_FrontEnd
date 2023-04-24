@@ -65,7 +65,7 @@ class _CalorieState extends State<Calorie> {
               child: CircularProgressIndicator(),
             )
         : Form(
-          key : _calorieStateFormKey,
+         // key : _calorieStateFormKey,
           child: ListView(
               children: [
           const Text(
@@ -104,7 +104,7 @@ class _CalorieState extends State<Calorie> {
                     return ListTile(
                       onTap: ()async {
                           FocusScope.of(context).unfocus();
-                            if (_calorieStateFormKey.currentState!.validate()) {
+                           // if (_calorieStateFormKey.currentState!.validate()) {
                               isLoading = true;
                               setState(() {});
                               await countCalorieApi(
@@ -117,7 +117,7 @@ class _CalorieState extends State<Calorie> {
                                   msg =
                                       "Food Added Sucessfully";
                                       user.data!.first.foodIngested!.add(FoodIngested(sId: "0",calories: food.calories,sauceName: food.name));
-                                      profile.data!.calorieIngested = (profile.data!.calorieIngested!.toInt() + food.calories) as int?;
+                                     // profile.data!.calorieIngested = (profile.data!.calorieIngested!.toInt() + food.calories) as int?;
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -133,7 +133,7 @@ class _CalorieState extends State<Calorie> {
                                   ),
                                 );
                               });
-                            }
+                           // }
                         //     setState(() {
                         //   print(foodController.filteredList[index].name);
                         //   _newList.add(
@@ -195,7 +195,7 @@ class _CalorieState extends State<Calorie> {
                                   ),
                                 ),
                                 Text(
-                                  "${user.data!.first.foodIngested![i].sauceName}",
+                                  "${user.data!.first.foodIngested![i].sauceName}" ,
                                   style: normalTextStyle,
                                 ),
                                 const Spacer(),

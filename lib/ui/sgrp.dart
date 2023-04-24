@@ -36,11 +36,11 @@ class _grp extends State<grp> {
   getGroups() async {
     isLoading = true;
     setState(() {});
-    groupsResponse = await getGroupsApi();
+    groupsResponse = await getGroupUserApi();
     isLoading = false;
     setState(() {});
 
-    print("Users: ${groupsResponse.toString()}");
+    //print("Users: ${groupsResponse.toString()}");
   }
 
   @override
