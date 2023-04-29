@@ -201,7 +201,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     ),
                                     decoration: InputDecoration(
                                       fillColor: Colors.white,
-                                      hintText: "Height",
+                                      hintText: "Height(in cm)",
                                       filled: true,
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(18),
@@ -227,7 +227,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     ),
                                     decoration: InputDecoration(
                                       fillColor: Colors.white,
-                                      hintText: "Weight",
+                                      hintText: "Weight(in kg)",
                                       filled: true,
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(18),

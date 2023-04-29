@@ -117,7 +117,7 @@ class _CalorieState extends State<Calorie> {
                                   msg =
                                       "Food Added Sucessfully";
                                       user.data!.first.foodIngested!.add(FoodIngested(sId: "0",calories: food.calories,sauceName: food.name));
-                                     // profile.data!.calorieIngested = (profile.data!.calorieIngested!.toInt() + food.calories) as int?;
+                                      profile.data!.calorieIngested = (profile.data!.calorieIngested!.toInt() + food.calories) as int?;
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(

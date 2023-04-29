@@ -20,9 +20,9 @@ class _EditProfileScreen extends State<EditProfileScreen> {
   bool isLoading = false;
   //bool isObscure = true;
 
-  TextEditingController userNameController = TextEditingController(text: "Ninja5454");
-  TextEditingController heightController = TextEditingController(text: "83");
-  TextEditingController weightController = TextEditingController(text: "187");
+  TextEditingController userNameController = TextEditingController(text: "");
+  TextEditingController heightController = TextEditingController(text: "");
+  TextEditingController weightController = TextEditingController(text: "");
   @override
   Widget build(BuildContext context) {
     // inputDecorationTheme : TTextFormFieldTheme.kPrimaryTheme;
@@ -95,7 +95,7 @@ class _EditProfileScreen extends State<EditProfileScreen> {
                                       decimal: true,
                                     ),
                               decoration: InputDecoration(
-                                label: const Text("Weight"),
+                                label: const Text("Weight(in kg)"),
                                 fillColor: Colors.white,
                                 filled: true,
                                 prefixIcon:
@@ -126,7 +126,7 @@ class _EditProfileScreen extends State<EditProfileScreen> {
                                       decimal: true,
                                     ),
                               decoration: InputDecoration(
-                                label: const Text("Height"),
+                                label: const Text("Height(in cm)"),
                                 fillColor: Colors.white,
                                 filled: true,
                                 prefixIcon:

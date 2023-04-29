@@ -26,18 +26,18 @@ class Data {
   String? firstname;
   String? lastname;
   String? username;
-  int? age;
+  num? age;
   String? password;
   String? email;
-  int? weight;
-  int? height;
+  num? weight;
+  num? height;
   String? gender;
-  double? calorieIngested;
-  int? stepsWalked;
-  int? streaks;
-  int? calorieGoal;
-  int? stepsGoal;
-  int? recommendedCalories;
+  num? calorieIngested;
+  num? stepsWalked;
+  num? streaks;
+  num? calorieGoal;
+  num? stepsGoal;
+  num? recommendedCalories;
   int? iV;
 
   Data(

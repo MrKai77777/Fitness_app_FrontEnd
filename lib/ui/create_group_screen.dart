@@ -19,11 +19,11 @@ class _CreateGroupScreen extends State<CreateGroupScreen> {
   bool isLoading = false;
 
   TextEditingController groupNameController =
-      TextEditingController(text: "KEC");
+      TextEditingController(text: "");
   TextEditingController stepGoalController =
-      TextEditingController(text: "4000");
+      TextEditingController(text: "");
   TextEditingController calorieGoalController =
-      TextEditingController(text: "1000");
+      TextEditingController(text: "");
 
   @override
   Widget build(BuildContext context) {

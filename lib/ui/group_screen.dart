@@ -62,6 +62,13 @@ class _GroupScreen extends State<GroupScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 16.0),
                   child: Text(
+                    "ID:${groupsResponse.data![widget.groupI].sId}",
+                    style: descTextStyle.copyWith(color: Colors.white),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 16.0),
+                  child: Text(
                     "Calorie Goal:${groupsResponse.data![widget.groupI].calorieGoals}",
                     style: descTextStyle.copyWith(color: kPrimaryColor),
                   ),

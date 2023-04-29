@@ -58,7 +58,7 @@ class _Profile extends State<Profile> {
             )
           : SingleChildScrollView(
               child: Container(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(2.0),
                 child: Column(children: [
                    Text(
                     "Profile" ,

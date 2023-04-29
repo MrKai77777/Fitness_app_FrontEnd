@@ -68,7 +68,7 @@ class Data {
 
 class FoodIngested {
   String? sauceName;
-  double? calories;
+  num? calories;
   String? sId;
 
   FoodIngested({

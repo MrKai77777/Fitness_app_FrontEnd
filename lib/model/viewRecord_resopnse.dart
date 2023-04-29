@@ -31,10 +31,10 @@ class Data {
   String? accountId;
   String? firstname;
   List<Progress>? progress;
-  double? maxStreaks;
+  num? maxStreaks;
   int? iV;
-  double? averageCalories;
-  double? averageSteps;
+  num? averageCalories;
+  num? averageSteps;
 
   Data(
       {this.sId,
@@ -84,8 +84,8 @@ class Data {
 }
 
 class Progress {
-  double? steps;
-  double? calorie;
+  num? steps;
+  num? calorie;
   String? date;
   String? sId;
 

@@ -43,19 +43,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await createRecordApi();
-      // print('a');
+       print('a');
       await createFriendRecordApi();
-      // print('a');
+       print('a');
       await viewRecord();
-     // print('a');
+      print('a');
       await getProfile();
-     // print('a');
+      print('a');
       await recordDataApi();
-     // print('a');
+      print('a');
       await calorieResetApi();
-     // print('a');
+      print('a');
       await initPlatformState();
-     // print('a');
+      print('a');
     });
     
   }
